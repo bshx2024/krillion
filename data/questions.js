@@ -15,9 +15,9 @@ export const DAILY_GAME_DATA = {
         "verifiedDate": "October 10, 2026",
         "modelRationale": "Ojai and Weed are officially incorporated municipalities with low population density and low top-of-mind retrieval compared to coastal giants.",
         "hints": {
-            "stage1": "Think beyond Southern California coastal giants; think northern inland or historic small valley towns.",
-            "stage2": "Starts with 'O' or 'W', short 4-letter name famous for citrus or mountain views.",
-            "stage3": "Ojai (100 pts) / Weed (100 pts) / Yreka (95 pts)"
+            "stage1": "Think beyond coastal metropolitan giants; think of smaller incorporated California cities, including historic inland towns and mountain communities.",
+            "stage2": "Focus on historic valley, agricultural, or mountain municipalities (such as Ventura County citrus valleys or Siskiyou County).",
+            "stage3": "Ojai, Weed, Yreka, Dunsmuir, Point Arena (100 pts). Avoid: Sacramento!"
         },
         "plankton": [
             "Los Angeles",

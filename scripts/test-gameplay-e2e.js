@@ -36,8 +36,11 @@ console.log('📋 Suite 1: Initial HTML Cleanliness & Spoiler Shields');
 const indexHtml = fs.readFileSync(path.join(ROOT_DIR, 'index.html'), 'utf8');
 
 assert(!indexHtml.includes('TRENCH CONQUERED!'), 'No hardcoded "TRENCH CONQUERED!" placeholder in initial HTML');
+assert(!indexHtml.includes('TRENCH DIVE COMPLETE'), 'No hardcoded "TRENCH DIVE COMPLETE" placeholder in initial HTML');
 assert(!indexHtml.includes('6,920 / 7,000m'), 'No hardcoded "6,920 / 7,000m" score leak in initial HTML');
+assert(!indexHtml.includes('0 / 7,000m'), 'No hardcoded "0 / 7,000m" template leak in initial HTML');
 assert(!indexHtml.includes('Less than 1% of players'), 'No misleading "Less than 1% of players" static text in initial HTML');
+assert(indexHtml.includes('Think of smaller incorporated California cities, including historic inland towns and mountain communities.'), 'California prompt hint accurately covers all small incorporated candidate answers');
 assert(indexHtml.includes('id="spoiler-shield-card"'), 'Answers Table has active #spoiler-shield-card');
 assert(indexHtml.includes('id="spoiler-revealed-content"') && indexHtml.includes('class="spoiler-revealed-content is-hidden"'), 'Answers Table is initially wrapped with class "is-hidden"');
 assert(indexHtml.includes('id="spoiler-hints-shield"'), 'Progressive Hints Section has active #spoiler-hints-shield');

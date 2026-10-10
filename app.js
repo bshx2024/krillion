@@ -240,11 +240,15 @@ class KrillionGameController {
     if (streakNum) streakNum.textContent = stats.streak;
     if (heroPB) {
       const best = stats.bestDepth || 0;
-      let rank = 'Surface Diver';
-      if (best >= 6500) rank = 'Hadal Conqueror';
-      else if (best >= 4000) rank = 'Abyss Explorer';
-      else if (best >= 1000) rank = 'Twilight Diver';
-      heroPB.textContent = `${best.toLocaleString()}m • ${rank}`;
+      if (best === 0) {
+        heroPB.textContent = '0m (Ready to dive)';
+      } else {
+        let rank = 'Surface Diver';
+        if (best >= 6500) rank = 'Hadal Conqueror';
+        else if (best >= 4000) rank = 'Abyss Explorer';
+        else if (best >= 1000) rank = 'Twilight Diver';
+        heroPB.textContent = `${best.toLocaleString()}m • ${rank}`;
+      }
     }
   }
 
