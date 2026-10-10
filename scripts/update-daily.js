@@ -129,19 +129,20 @@ const SCHEDULED_SETS = [
     },
     {
       id: 7,
-      category: "Music & Pop Culture",
-      prompt: "A member of the British rock band Queen",
+      category: "Music & Band Members",
+      prompt: "An official member of the British rock band Queen",
+      verificationNote: "Must be one of the four permanent official core recording members of Queen (1971–present).",
       hints: {
-        stage1: "The bassist who retired from music and wrote 'Another One Bites the Dust'.",
-        stage2: "Starts with 'J...', quietest member of the quartet.",
-        stage3: "John Deacon (100 pts)"
+        stage1: "The bassist who retired from music in 1997 and wrote 'Another One Bites the Dust'.",
+        stage2: "Starts with 'J...', 4-letter first name, 6-letter surname.",
+        stage3: "John Deacon (100m). (The official 4 members are Freddie Mercury, Brian May, Roger Taylor, and John Deacon)."
       },
       plankton: ["Freddie Mercury"],
       tooClever: ["Brian May"],
       schooler: ["Roger Taylor"],
-      rare: ["John Deacon"],
-      deepCut: ["Mike Grose (original 1970 bassist)", "Barry Mitchell"],
-      oneInAKrillion: ["Doug Bogie", "John Deacon"]
+      rare: [],
+      deepCut: [],
+      oneInAKrillion: ["John Deacon"]
     }
   ],
   // Set 1 (Next rotation)
@@ -453,6 +454,7 @@ ${selectedPrompts.map((p, idx) => `              <tr>
                 <td><strong>${idx + 1}</strong></td>
                 <td><span class="cat-pill">${p.category}</span></td>
                 <td>${p.prompt}</td>
+                <td><span class="text-muted">${p.verificationNote || 'Verified entity'}</span></td>
                 <td><strong class="text-glow">${p.oneInAKrillion[0]}</strong>, ${p.oneInAKrillion.slice(1, 3).join(', ')}</td>
                 <td><span class="text-warning">${p.tooClever.slice(0, 3).join(', ')}</span></td>
                 <td><span class="text-muted">${p.plankton.slice(0, 3).join(', ')}</span></td>

@@ -1,5 +1,5 @@
-# Robots.txt for Krillion Hub & Unlimited
-# Welcoming all web and AI search crawlers
+# Robots.txt for Krillion.click
+# Welcoming all standard and AI search crawlers
 
 User-agent: *
 Allow: /
@@ -26,5 +26,5 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 
-Sitemap: https://krilliongame.org/sitemap.xml
-Sitemap: https://krilliongame.org/llms.txt
+Sitemap: https://www.krillion.click/sitemap.xml
+Sitemap: https://www.krillion.click/llms.txt

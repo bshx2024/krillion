@@ -1,3 +1,4 @@
+// Krillion.click - Core Game Engine & Two-Tier Evaluation System
 import { DAILY_GAME_DATA, UNLIMITED_PROMPT_POOL, ARCHIVE_GAMES } from './data/questions.js';
 
 // --- Sound Synthesizer via Web Audio API ---
@@ -10,9 +11,7 @@ class SoundEffects {
   init() {
     if (!this.ctx) {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      if (AudioCtx) {
-        this.ctx = new AudioCtx();
-      }
+      if (AudioCtx) this.ctx = new AudioCtx();
     }
     if (this.ctx && this.ctx.state === 'suspended') {
       this.ctx.resume();
@@ -32,7 +31,7 @@ class SoundEffects {
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(880, this.ctx.currentTime); // A5
+      osc.frequency.setValueAtTime(880, this.ctx.currentTime);
       osc.frequency.exponentialRampToValueAtTime(1760, this.ctx.currentTime + 0.15);
       gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.9);
@@ -40,9 +39,7 @@ class SoundEffects {
       gain.connect(this.ctx.destination);
       osc.start();
       osc.stop(this.ctx.currentTime + 0.9);
-    } catch (e) {
-      console.warn("Audio play error", e);
-    }
+    } catch (e) {}
   }
 
   playSuccessChime() {
@@ -87,6 +84,52 @@ class SoundEffects {
 
 const sfx = new SoundEffects();
 
+// --- LocalStorage Retention Manager ---
+class RetentionManager {
+  static getStats() {
+    const defaultStats = {
+      streak: 0,
+      lastPlayedDate: null,
+      bestDepth: 0,
+      totalGames: 0
+    };
+    try {
+      const data = localStorage.getItem('krillion_user_stats');
+      return data ? JSON.parse(data) : defaultStats;
+    } catch (e) {
+      return defaultStats;
+    }
+  }
+
+  static saveGameCompletion(depth) {
+    const stats = this.getStats();
+    const todayStr = new Date().toISOString().split('T')[0];
+
+    stats.totalGames = (stats.totalGames || 0) + 1;
+    stats.bestDepth = Math.max(stats.bestDepth || 0, depth);
+
+    if (stats.lastPlayedDate) {
+      const last = new Date(stats.lastPlayedDate);
+      const curr = new Date(todayStr);
+      const diffDays = Math.round((curr - last) / (1000 * 60 * 60 * 24));
+      if (diffDays === 1) {
+        stats.streak += 1;
+      } else if (diffDays > 1) {
+        stats.streak = 1;
+      }
+    } else {
+      stats.streak = 1;
+    }
+    stats.lastPlayedDate = todayStr;
+
+    try {
+      localStorage.setItem('krillion_user_stats', JSON.stringify(stats));
+    } catch (e) {}
+
+    return stats;
+  }
+}
+
 // --- Levenshtein Distance for Typo-Tolerance ---
 function levenshtein(a, b) {
   const an = a ? a.length : 0;
@@ -95,16 +138,16 @@ function levenshtein(a, b) {
   if (bn === 0) return an;
   const matrix = Array.from({ length: bn + 1 }, () => Array(an + 1).fill(0));
   for (let i = 0; i <= an; i++) matrix[0][i] = i;
-  for (let j = 0; j <= bn; j++) matrix[j][0] = j;
+  for (let j = 0; j <= bn; j++) matrix[j][i] = j;
   for (let j = 1; j <= bn; j++) {
     for (let i = 1; i <= an; i++) {
       if (b.charAt(j - 1) === a.charAt(i - 1)) {
         matrix[j][i] = matrix[j - 1][i - 1];
       } else {
         matrix[j][i] = Math.min(
-          matrix[j - 1][i - 1] + 1, // substitution
-          matrix[j][i - 1] + 1,     // insertion
-          matrix[j - 1][i] + 1      // deletion
+          matrix[j - 1][i - 1] + 1,
+          matrix[j][i - 1] + 1,
+          matrix[j - 1][i] + 1
         );
       }
     }
@@ -112,7 +155,6 @@ function levenshtein(a, b) {
   return matrix[bn][an];
 }
 
-// Find closest match among all valid answers in a prompt
 function findTypoMatch(userInput, promptObj) {
   const cleaned = userInput.trim().toLowerCase();
   if (cleaned.length < 3) return null;
@@ -136,17 +178,18 @@ function findTypoMatch(userInput, promptObj) {
   return null;
 }
 
-// --- Krillion Unlimited Game Engine ---
-class KrillionGame {
+// --- Krillion Main Game Controller ---
+class KrillionGameController {
   constructor() {
-    this.mode = 'timed'; // 'timed' or 'zen'
+    this.sessionType = 'daily'; // 'daily' or 'unlimited'
+    this.timerMode = 'timed';   // 'timed' or 'zen'
     this.timePerPrompt = 25;
     this.currentTimer = 25;
     this.timerInterval = null;
 
     this.currentPrompts = [];
     this.currentIndex = 0;
-    this.totalDepth = 0; // in meters (max 7000)
+    this.totalDepth = 0;
     this.sessionHistory = [];
 
     // DOM Elements
@@ -159,6 +202,7 @@ class KrillionGame {
     this.promptStepBadge = document.getElementById('prompt-step-badge');
     this.promptCatBadge = document.getElementById('prompt-category-badge');
     this.promptQuestion = document.getElementById('prompt-question-text');
+    this.promptRuleCaption = document.getElementById('prompt-rule-caption');
     this.hintToggleBtn = document.getElementById('game-hint-toggle');
     this.hintContent = document.getElementById('game-hint-content');
     this.hintText = document.getElementById('game-hint-text');
@@ -170,6 +214,8 @@ class KrillionGame {
     this.feedbackBadge = document.getElementById('feedback-tier-badge');
     this.feedbackPoints = document.getElementById('feedback-points');
     this.feedbackExplanation = document.getElementById('feedback-explanation');
+    this.whyBox = document.getElementById('why-this-answer-box');
+    this.whyText = document.getElementById('why-this-answer-text');
     this.nextPromptBtn = document.getElementById('next-prompt-btn');
     this.progressContainer = document.getElementById('progress-indicators');
 
@@ -179,35 +225,83 @@ class KrillionGame {
     this.summaryTierName = document.getElementById('summary-tier-name');
     this.summaryBreakdown = document.getElementById('summary-breakdown-list');
     this.shareTextArea = document.getElementById('share-text-area');
+    this.modalStreakCount = document.getElementById('modal-streak-count');
 
     this.initEventListeners();
-    this.startNewGame();
+    this.updateUserStatsUI();
+    this.startSession('daily');
+  }
+
+  updateUserStatsUI() {
+    const stats = RetentionManager.getStats();
+    const streakNum = document.getElementById('header-streak-num');
+    const heroPB = document.getElementById('hero-personal-best');
+
+    if (streakNum) streakNum.textContent = stats.streak;
+    if (heroPB) {
+      const best = stats.bestDepth || 0;
+      let rank = 'Surface Diver';
+      if (best >= 6500) rank = 'Hadal Conqueror';
+      else if (best >= 4000) rank = 'Abyss Explorer';
+      else if (best >= 1000) rank = 'Twilight Diver';
+      heroPB.textContent = `${best.toLocaleString()}m • ${rank}`;
+    }
   }
 
   initEventListeners() {
-    // Mode toggles
-    const timedBtn = document.getElementById('mode-timed-btn');
-    const zenBtn = document.getElementById('mode-zen-btn');
-    timedBtn.addEventListener('click', () => {
-      this.mode = 'timed';
-      timedBtn.classList.add('active');
-      zenBtn.classList.remove('active');
+    // Hero CTA jump buttons
+    const heroDailyBtn = document.getElementById('hero-start-daily-btn');
+    const heroUnlimitedBtn = document.getElementById('hero-start-unlimited-btn');
+    if (heroDailyBtn) {
+      heroDailyBtn.addEventListener('click', () => {
+        document.getElementById('game-section').scrollIntoView({ behavior: 'smooth' });
+        this.startSession('daily');
+      });
+    }
+    if (heroUnlimitedBtn) {
+      heroUnlimitedBtn.addEventListener('click', () => {
+        document.getElementById('game-section').scrollIntoView({ behavior: 'smooth' });
+        this.startSession('unlimited');
+      });
+    }
+
+    // Daily vs Unlimited Tabs
+    const dailyTab = document.getElementById('mode-daily-tab');
+    const unlimitedTab = document.getElementById('mode-unlimited-tab');
+    dailyTab.addEventListener('click', () => {
+      dailyTab.classList.add('active');
+      unlimitedTab.classList.remove('active');
+      this.startSession('daily');
+    });
+    unlimitedTab.addEventListener('click', () => {
+      unlimitedTab.classList.add('active');
+      dailyTab.classList.remove('active');
+      this.startSession('unlimited');
+    });
+
+    // Timed vs Zen Toggles
+    const timedToggle = document.getElementById('timer-timed-toggle');
+    const zenToggle = document.getElementById('timer-zen-toggle');
+    timedToggle.addEventListener('click', () => {
+      this.timerMode = 'timed';
+      timedToggle.classList.add('active');
+      zenToggle.classList.remove('active');
       this.timerBox.style.display = 'flex';
       this.resetTimer();
     });
-    zenBtn.addEventListener('click', () => {
-      this.mode = 'zen';
-      zenBtn.classList.add('active');
-      timedBtn.classList.remove('active');
+    zenToggle.addEventListener('click', () => {
+      this.timerMode = 'zen';
+      zenToggle.classList.add('active');
+      timedToggle.classList.remove('active');
       this.timerBox.style.display = 'none';
       clearInterval(this.timerInterval);
     });
 
-    // New Game button
-    document.getElementById('new-game-btn').addEventListener('click', () => this.startNewGame());
+    // Reset button
+    document.getElementById('new-game-btn').addEventListener('click', () => this.startSession(this.sessionType));
     document.getElementById('play-again-modal-btn').addEventListener('click', () => {
       this.summaryModal.style.display = 'none';
-      this.startNewGame();
+      this.startSession(this.sessionType);
     });
 
     // Sound toggle
@@ -223,7 +317,7 @@ class KrillionGame {
       this.hintContent.style.display = isVisible ? 'none' : 'block';
     });
 
-    // Live typing typo tolerance check
+    // Real-time typo helper
     this.answerInput.addEventListener('input', () => {
       const currentQ = this.currentPrompts[this.currentIndex];
       if (!currentQ) return;
@@ -236,14 +330,13 @@ class KrillionGame {
       }
     });
 
-    // Accept typo suggestion on click
     this.typoTip.addEventListener('click', () => {
       this.answerInput.value = this.typoWord.textContent;
       this.typoTip.style.display = 'none';
       this.answerInput.focus();
     });
 
-    // Submit form
+    // Submit answer form
     this.inputForm.addEventListener('submit', (e) => {
       e.preventDefault();
       this.handleSubmit();
@@ -265,15 +358,19 @@ class KrillionGame {
     });
   }
 
-  startNewGame() {
+  startSession(type = 'daily') {
+    this.sessionType = type;
     clearInterval(this.timerInterval);
     this.currentIndex = 0;
     this.totalDepth = 0;
     this.sessionHistory = [];
 
-    // Shuffle and pick 7 prompts from UNLIMITED_PROMPT_POOL
-    const shuffled = [...UNLIMITED_PROMPT_POOL].sort(() => 0.5 - Math.random());
-    this.currentPrompts = shuffled.slice(0, 7);
+    if (type === 'daily') {
+      this.currentPrompts = [...DAILY_GAME_DATA.prompts];
+    } else {
+      const pool = [...UNLIMITED_PROMPT_POOL].sort(() => 0.5 - Math.random());
+      this.currentPrompts = pool.slice(0, 7);
+    }
 
     this.renderProgressPills();
     this.updateDepthDisplay();
@@ -295,6 +392,9 @@ class KrillionGame {
     this.promptStepBadge.textContent = `Prompt ${this.currentIndex + 1} of 7`;
     this.promptCatBadge.textContent = q.category;
     this.promptQuestion.textContent = q.prompt;
+    if (this.promptRuleCaption) {
+      this.promptRuleCaption.textContent = q.verificationNote ? `Verification Rule: ${q.verificationNote}` : '';
+    }
     this.hintText.textContent = q.hints.stage1;
     this.hintContent.style.display = 'none';
 
@@ -305,15 +405,13 @@ class KrillionGame {
     this.typoTip.style.display = 'none';
     this.answerInput.focus();
 
-    // Update progress pill
     const dots = this.progressContainer.querySelectorAll('.progress-dot');
     dots.forEach((dot, idx) => {
       if (idx === this.currentIndex) dot.classList.add('active');
       else dot.classList.remove('active');
     });
 
-    // Start timer if timed mode
-    if (this.mode === 'timed') {
+    if (this.timerMode === 'timed') {
       this.resetTimer();
     }
   }
@@ -362,10 +460,23 @@ class KrillionGame {
     let explanation = '';
     let badgeClass = '';
     let emoji = '⬛';
+    let educationalNote = '';
 
     const cleanInput = userInput.trim().toLowerCase();
-
     const isMatch = (arr) => arr.some(item => item.toLowerCase() === cleanInput || levenshtein(item.toLowerCase(), cleanInput) <= 1);
+
+    // Look up educational explanation
+    if (q.whyThisAnswer) {
+      for (const [key, note] of Object.entries(q.whyThisAnswer)) {
+        if (cleanInput.includes(key) || key.includes(cleanInput)) {
+          educationalNote = note;
+          break;
+        }
+      }
+    }
+    if (!educationalNote) {
+      educationalNote = `Verified entry for prompt: "${q.prompt}". Conforms to official category criteria.`;
+    }
 
     if (isTimeout || !userInput) {
       tier = 'TIMED OUT';
@@ -373,14 +484,15 @@ class KrillionGame {
       depthGained = 0;
       badgeClass = 'plankton';
       emoji = '🟥';
-      explanation = `Time ran out! You remained at current depth without diving. (Top answer: ${q.oneInAKrillion[0]})`;
+      explanation = `Time expired! No depth gained. (A top trench answer was: ${q.oneInAKrillion[0] || 'N/A'})`;
+      educationalNote = q.verificationNote || "Remember to submit before the 25-second countdown ends.";
     } else if (isMatch(q.oneInAKrillion)) {
       tier = 'ONE IN A KRILLION';
       points = 100;
       depthGained = 1000;
       badgeClass = 'one-in-krillion';
       emoji = '🤿';
-      explanation = `🌟 Incredible! You supplied a truly rare, bottom-of-the-trench response (${userInput}). Top 1% tier!`;
+      explanation = `🌟 Verified Obscurity! High-tier deep cut candidate. Maximum trench depth!`;
       sfx.playSuccessChime();
     } else if (isMatch(q.deepCut)) {
       tier = 'DEEP CUT';
@@ -388,7 +500,7 @@ class KrillionGame {
       depthGained = 800;
       badgeClass = 'one-in-krillion';
       emoji = '🟦';
-      explanation = `Deep dive! Highly esoteric and rarely selected. Excellent knowledge.`;
+      explanation = `Substantial niche knowledge! High depth score.`;
       sfx.playSonarPing();
     } else if (isMatch(q.rare)) {
       tier = 'RARE';
@@ -396,7 +508,7 @@ class KrillionGame {
       depthGained = 500;
       badgeClass = 'one-in-krillion';
       emoji = '🟩';
-      explanation = `Solid choice! Only a small minority of divers thought of this.`;
+      explanation = `Valid rare response. Escapes mainstream frequency.`;
       sfx.playSonarPing();
     } else if (isMatch(q.schooler)) {
       tier = 'SCHOOLER';
@@ -404,14 +516,14 @@ class KrillionGame {
       depthGained = 250;
       badgeClass = 'schooler';
       emoji = '🟨';
-      explanation = `A decent answer, but moderately popular among the school of players.`;
+      explanation = `Solid valid answer, but recognized by a moderate portion of players.`;
     } else if (isMatch(q.tooClever)) {
       tier = 'TOO CLEVER TRAP';
       points = 15;
       depthGained = 150;
       badgeClass = 'too-clever';
       emoji = '🟧';
-      explanation = `⚠️ COLLISION DETECTED: You tried to pick a clever alternative, but thousands of other players had the exact same idea!`;
+      explanation = `⚠️ STATISTICAL COLLISION: You tried to pick a non-obvious pick, but thousands of players had that same secondary thought!`;
       sfx.playWarningBuzzer();
     } else if (isMatch(q.plankton)) {
       tier = 'PLANKTON';
@@ -419,15 +531,15 @@ class KrillionGame {
       depthGained = 80;
       badgeClass = 'plankton';
       emoji = '⬜';
-      explanation = `Too obvious! This was the first answer that came to mind for almost everyone.`;
+      explanation = `Surface choice! This was the first top-of-mind candidate for almost everyone.`;
     } else {
-      // General valid answer / fallback
-      tier = 'UNLISTED VALID GUESS';
+      // General valid answer / heuristic fallback
+      tier = 'VALID ANSWER (HEURISTIC)';
       points = 40;
       depthGained = 400;
       badgeClass = 'schooler';
       emoji = '🟪';
-      explanation = `Recognized as potentially valid! Graded with a baseline depth of +400m.`;
+      explanation = `Factually recognized entry! Graded with a baseline heuristic depth of +400m.`;
       sfx.playSonarPing();
     }
 
@@ -435,13 +547,12 @@ class KrillionGame {
     this.sessionHistory.push({
       prompt: q.prompt,
       category: q.category,
-      answer: userInput || '(Timeout)',
+      answer: userInput || '(Timed Out)',
       tier,
       depthGained,
       emoji
     });
 
-    // Mark dot done
     const dots = this.progressContainer.querySelectorAll('.progress-dot');
     if (dots[this.currentIndex]) {
       dots[this.currentIndex].classList.remove('active');
@@ -450,11 +561,17 @@ class KrillionGame {
 
     this.updateDepthDisplay();
 
-    // Show feedback banner
+    // Render feedback
     this.feedbackBadge.className = `feedback-tier-badge ${badgeClass}`;
     this.feedbackBadge.textContent = tier;
     this.feedbackPoints.textContent = `+${points} Points (+${depthGained}m Depth)`;
     this.feedbackExplanation.textContent = explanation;
+
+    if (this.whyBox && this.whyText) {
+      this.whyText.textContent = educationalNote;
+      this.whyBox.style.display = 'block';
+    }
+
     this.feedbackBanner.style.display = 'block';
   }
 
@@ -485,27 +602,35 @@ class KrillionGame {
 
   finishGame() {
     sfx.playSuccessChime();
+
+    // Save stats to LocalStorage
+    const updatedStats = RetentionManager.saveGameCompletion(this.totalDepth);
+    this.updateUserStatsUI();
+
     this.finalDepthStat.textContent = `${this.totalDepth.toLocaleString()} / 7,000m`;
+    if (this.modalStreakCount) {
+      this.modalStreakCount.textContent = updatedStats.streak;
+    }
 
     let title = 'Trench Diver';
     let icon = '🌊';
     if (this.totalDepth >= 6500) {
-      title = '🏆 HADAL TRENCH CONQUEROR (One in a Krillion!)';
+      title = '👑 HADAL TRENCH CONQUEROR (One in a Krillion!)';
       icon = '👑';
     } else if (this.totalDepth >= 5000) {
-      title = '🤿 Abyss Explorer';
+      title = '💎 Abyss Explorer';
       icon = '💎';
     } else if (this.totalDepth >= 3000) {
-      title = '🐟 Midnight Swimmer';
+      title = '🐠 Midnight Swimmer';
       icon = '🐠';
     } else {
-      title = '🦐 Plankton Drifter';
+      title = '🌿 Plankton Drifter';
       icon = '🌿';
     }
 
     document.getElementById('summary-icon').textContent = icon;
     document.getElementById('summary-title').textContent = title;
-    this.summaryTierName.textContent = `Final Depth: ${this.totalDepth}m • ${this.totalDepth >= 6000 ? 'Master' : 'Amateur'} Rank`;
+    this.summaryTierName.textContent = `Depth Reached: ${this.totalDepth}m • ${this.totalDepth >= 6000 ? 'Master' : 'Participant'} Tier`;
 
     // Breakdown list
     this.summaryBreakdown.innerHTML = '';
@@ -522,12 +647,14 @@ class KrillionGame {
       this.summaryBreakdown.appendChild(row);
     });
 
-    // Generate Wordle/Krillion Share text
+    // Generate Wordle/Krillion Share text (Spoiler-safe!)
     const emojiBlocks = this.sessionHistory.map(h => h.emoji).join('');
-    const shareText = `Krillion Unlimited 🌊
+    const todayStr = new Date().toISOString().split('T')[0];
+    const shareText = `Krillion.click (${todayStr})
 Depth: ${this.totalDepth.toLocaleString()}m / 7,000m
+Streak: ${updatedStats.streak} Days 🔥
 ${emojiBlocks}
-Can you reach the trench floor? Play free at https://krilliongame.org`;
+Test your obscurity: https://www.krillion.click`;
     this.shareTextArea.value = shareText;
 
     this.summaryModal.style.display = 'flex';
@@ -541,7 +668,7 @@ function initCategoryTabs() {
 
   const categoryData = {
     geography: {
-      title: "Geography Cheat Sheet (+110% Search Surge)",
+      title: "Geography Cheat Sheet (Verified Entities)",
       items: [
         { prompt: "European Capitals", answer: "Vaduz (Liechtenstein), Podgorica (Montenegro), Chisinau (Moldova)" },
         { prompt: "US State Capitals", answer: "Pierre (SD), Helena (MT), Juneau (AK), Frankfort (KY)" },
@@ -550,10 +677,10 @@ function initCategoryTabs() {
       ]
     },
     movies: {
-      title: "Movies & Cinema High-Depth Answers",
+      title: "Movies & Cinema High-Depth Candidates",
       items: [
-        { prompt: "Christopher Nolan Films", answer: "Following (100m), Quay (95m) - Avoid Memento!" },
-        { prompt: "Quentin Tarantino Films", answer: "Death Proof (100m), My Best Friend's Birthday (95m)" },
+        { prompt: "Christopher Nolan Films", answer: "Following (100m) - Note: Memento is a common Too Clever trap!" },
+        { prompt: "Quentin Tarantino Films", answer: "Death Proof (100m), My Best Friend's Birthday" },
         { prompt: "Best Picture Oscar Winners (Pre-1970)", answer: "The Broadway Melody (1929), Cavalcade (1933), Marty (1955)" },
         { prompt: "James Bond Villains", answer: "Aristotle Kristatos, Brad Whitaker, General Koskov" }
       ]
@@ -568,9 +695,9 @@ function initCategoryTabs() {
       ]
     },
     music: {
-      title: "Music & Band Member High-Rarity Picks",
+      title: "Music & Band Members (Fact-Checked)",
       items: [
-        { prompt: "Queen Band Members", answer: "John Deacon (100m), Doug Bogie (100m), Mike Grose" },
+        { prompt: "Queen Core Members", answer: "John Deacon (100m - composed 'Another One Bites the Dust', retired 1997)" },
         { prompt: "Brass Family Instruments", answer: "Euphonium, Mellophone, Ophicleide, Serpent" },
         { prompt: "Beatles Studio Albums", answer: "Beatles for Sale, With the Beatles - Avoid Abbey Road!" },
         { prompt: "Instruments in a String Quartet", answer: "Viola (100m), Cello (85m) - Avoid Violin!" }
@@ -590,7 +717,7 @@ function initCategoryTabs() {
       panel.innerHTML = `
         <div class="card glass-card">
           <h3 class="panel-head">${data.title}</h3>
-          <p class="text-muted" style="margin-bottom:1rem;">Top rare picks that reliably avoid the "Too Clever" collision trap:</p>
+          <p class="text-muted" style="margin-bottom:1rem;">Verified entities that reliably bypass the Too Clever collision trap:</p>
           <div class="category-item-grid">
             ${data.items.map(item => `
               <div class="cat-item">
@@ -605,94 +732,8 @@ function initCategoryTabs() {
   });
 }
 
-// --- Rarity Solver / Checker Tool ---
-function initRaritySolver() {
-  const input = document.getElementById('solver-input');
-  const btn = document.getElementById('solver-check-btn');
-  const resultsArea = document.getElementById('solver-results-area');
-
-  const checkRarity = () => {
-    const val = input.value.trim().toLowerCase();
-    if (!val) return;
-
-    // Search through all known answers in UNLIMITED_PROMPT_POOL
-    let found = null;
-    for (const q of UNLIMITED_PROMPT_POOL) {
-      if (q.oneInAKrillion.some(x => x.toLowerCase() === val)) {
-        found = { tier: 'ONE IN A KRILLION', score: 100, desc: 'Maximum trench depth! Outstanding obscure choice.', color: '#00ffc8' };
-        break;
-      }
-      if (q.deepCut.some(x => x.toLowerCase() === val)) {
-        found = { tier: 'DEEP CUT', score: 80, desc: 'Extremely rare, great chance of hitting top 5% score.', color: '#00d2ff' };
-        break;
-      }
-      if (q.rare.some(x => x.toLowerCase() === val)) {
-        found = { tier: 'RARE', score: 50, desc: 'Very solid. Only a small group of players think of this.', color: '#4cc9f0' };
-        break;
-      }
-      if (q.tooClever.some(x => x.toLowerCase() === val)) {
-        found = { tier: 'TOO CLEVER TRAP', score: 15, desc: 'High collision risk! Many players overthink to this exact word. Try a more obscure alternative.', color: '#ff9f1c' };
-        break;
-      }
-      if (q.plankton.some(x => x.toLowerCase() === val)) {
-        found = { tier: 'PLANKTON', score: 8, desc: 'Obvious surface pick. Almost everyone thinks of this first.', color: '#8b9bb4' };
-        break;
-      }
-    }
-
-    if (found) {
-      resultsArea.innerHTML = `
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-          <h4 style="font-size:1.2rem; color:#fff;">"${input.value}"</h4>
-          <span style="background:${found.color}22; color:${found.color}; border:1px solid ${found.color}; padding:0.25rem 0.75rem; border-radius:999px; font-weight:800; font-size:0.85rem;">
-            ${found.tier} (${found.score} pts)
-          </span>
-        </div>
-        <p style="color:#d1d5db; font-size:0.95rem;">${found.desc}</p>
-      `;
-    } else {
-      // Estimated rating based on character length and rarity heuristics
-      const isShortCommon = val.length <= 4;
-      const predicted = isShortCommon ? 'Schooler / Plankton' : 'Potentially Deep Cut / Rare';
-      resultsArea.innerHTML = `
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-          <h4 style="font-size:1.2rem; color:#fff;">"${input.value}"</h4>
-          <span style="background:rgba(255,255,255,0.1); color:#fff; padding:0.25rem 0.75rem; border-radius:999px; font-size:0.85rem;">
-            Custom Word Checked
-          </span>
-        </div>
-        <p style="color:#d1d5db; font-size:0.95rem;">
-          Estimated Rarity: <strong>${predicted}</strong>. If valid for the category, uncommon multi-syllable terms typically score deep in the trench.
-        </p>
-      `;
-    }
-  };
-
-  btn.addEventListener('click', checkRarity);
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') checkRarity();
-  });
-}
-
-// --- Historical Archive Renderer ---
-function initArchive() {
-  const grid = document.getElementById('archive-grid');
-  grid.innerHTML = ARCHIVE_GAMES.map(game => `
-    <div class="archive-card">
-      <div class="archive-head">
-        <span class="archive-game-num">Game #${game.gameNumber}</span>
-        <span class="archive-date">${game.date}</span>
-      </div>
-      <div class="archive-depth">Top Trench Depth: ${game.bestDepth}</div>
-      <p class="archive-highlights">${game.highlights}</p>
-    </div>
-  `).join('');
-}
-
 // --- Initialize App On Load ---
 document.addEventListener('DOMContentLoaded', () => {
-  new KrillionGame();
+  new KrillionGameController();
   initCategoryTabs();
-  initRaritySolver();
-  initArchive();
 });

@@ -1,16 +1,20 @@
 # Krillion Knowledge Base & Daily Answers (LLMs.txt)
 > Project: Krillion Hub & Krillion Unlimited
-> Website: https://krilliongame.org/
+> Website: https://www.krillion.click/
 > Updated: 2026-10-10
 
-## Overview
-Krillion (also referred to as "The Daily Dive") is a browser-based daily reverse-trivia word game.
+## Overview & Two-Tier Verification Methodology
+Krillion (The Daily Dive) is a web-based reverse-trivia daily puzzle.
 Players receive 7 daily prompts with a 25-second countdown per prompt.
-Unlike traditional trivia games that reward common popular answers, Krillion awards maximum points (up to 100 per prompt, 700 total, representing depth down to 7,000 meters in the ocean trench) for the rarest valid answers.
+Unlike traditional trivia games that reward common popular answers, Krillion awards depth points based on rarity (up to 100 per prompt, 700 max, representing a descent to 7,000 meters in the ocean trench).
+
+### Two-Tier Evaluation Architecture:
+1. Tier 1 (Fact-Check Validity): Is the answer an objectively recognized entity meeting the prompt criteria? (e.g. For "Borders Germany", all 9 bordering countries are valid; Liechtenstein is invalid).
+2. Tier 2 (Rarity Index): Evaluated via heuristic rarity modeling (top-of-mind linguistic frequency vs. long-tail obscure cataloging).
 
 ## Scoring Tiers
 - Plankton (4–10 pts): The most common, obvious answers (e.g., Los Angeles for a California city).
-- Too Clever (8–15 pts): Overthought answers where many players collide trying to sound smart (e.g., Sacramento, Pasadena).
+- Too Clever (8–15 pts): Overthought answers where many trivia players collide trying to sound smart (e.g., Sacramento, Pasadena).
 - Schooler (16–30 pts): Mid-tier answers.
 - Rare (32–60 pts): Answers selected by only a minority of players.
 - Deep Cut (64–85 pts): High-tier obscure knowledge.
@@ -35,6 +39,6 @@ Unlike traditional trivia games that reward common popular answers, Krillion awa
 6. A Summer Olympic sport / event:
    - One in a Krillion: Modern Pentathlon, Canoe Slalom, Keirin, Omnium, Skeet Shooting (100 pts)
    - Too Clever Trap: Archery, Fencing, Badminton, Table Tennis, Skateboarding (15 pts)
-7. A member of the British rock band Queen:
-   - One in a Krillion: Doug Bogie, John Deacon (100 pts)
+7. An official member of the British rock band Queen:
+   - One in a Krillion: John Deacon (100 pts)
    - Too Clever Trap: Brian May (15 pts)

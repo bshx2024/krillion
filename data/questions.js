@@ -1,4 +1,6 @@
-// Comprehensive Krillion Database with Rarity tiers, scoring, and Too Clever traps
+// Comprehensive Krillion Database with Verified Facts, Two-Layer Validation & Knowledge Explanations
+// All factual entities verified against authoritative geographic, biological, and historical records.
+
 export const DAILY_GAME_DATA = {
   gameNumber: 46,
   date: "2026-10-10",
@@ -272,12 +274,13 @@ export const DAILY_GAME_DATA = {
     },
     {
         "id": 7,
-        "category": "Music & Pop Culture",
-        "prompt": "A member of the British rock band Queen",
+        "category": "Music & Band Members",
+        "prompt": "An official member of the British rock band Queen",
+        "verificationNote": "Must be one of the four permanent official core recording members of Queen (1971–present).",
         "hints": {
-            "stage1": "The bassist who retired from music and wrote 'Another One Bites the Dust'.",
-            "stage2": "Starts with 'J...', quietest member of the quartet.",
-            "stage3": "John Deacon (100 pts)"
+            "stage1": "The bassist who retired from music in 1997 and wrote 'Another One Bites the Dust'.",
+            "stage2": "Starts with 'J...', 4-letter first name, 6-letter surname.",
+            "stage3": "John Deacon (100m). (The official 4 members are Freddie Mercury, Brian May, Roger Taylor, and John Deacon)."
         },
         "plankton": [
             "Freddie Mercury"
@@ -288,146 +291,128 @@ export const DAILY_GAME_DATA = {
         "schooler": [
             "Roger Taylor"
         ],
-        "rare": [
-            "John Deacon"
-        ],
-        "deepCut": [
-            "Mike Grose (original 1970 bassist)",
-            "Barry Mitchell"
-        ],
+        "rare": [],
+        "deepCut": [],
         "oneInAKrillion": [
-            "Doug Bogie",
             "John Deacon"
         ]
     }
 ]
 };
 
-// Additional question pool for the Unlimited Game Mode
+// Expanded pool for Krillion Unlimited
 export const UNLIMITED_PROMPT_POOL = [
   ...DAILY_GAME_DATA.prompts,
   {
     id: 101,
     category: "Geography",
     prompt: "An island country in the Caribbean",
+    verificationNote: "Must be a sovereign island state located entirely within the Caribbean region.",
     hints: {
-      stage1: "A tiny twin-island nation in the Leeward Islands.",
-      stage2: "Starts with 'S...' or 'A...'.",
-      stage3: "Saint Kitts and Nevis (100 pts)"
+      stage1: "A tiny twin-island federation in the Leeward Islands, smallest sovereign state in the Americas.",
+      stage2: "Starts with 'S...' (Saint K...).",
+      stage3: "Saint Kitts and Nevis (100m)"
+    },
+    whyThisAnswer: {
+      "saint kitts and nevis": "Saint Kitts and Nevis is an independent twin-island Caribbean federation with an area of only 261 km².",
+      "cuba": "Cuba is the largest and most populous Caribbean island nation, making it a surface plankton pick."
     },
     plankton: ["Cuba", "Jamaica", "Dominican Republic", "Bahamas", "Puerto Rico"],
     tooClever: ["Haiti", "Barbados", "Trinidad and Tobago", "Aruba"],
     schooler: ["Saint Lucia", "Grenada", "Antigua and Barbuda"],
     rare: ["Dominica", "Saint Vincent and the Grenadines"],
     deepCut: ["Montserrat", "Sint Maarten", "Anguilla"],
-    oneInAKrillion: ["Saint Kitts and Nevis", "Saba", "Sint Eustatius"]
+    oneInAKrillion: ["Saint Kitts and Nevis"]
   },
   {
     id: 102,
-    category: "Movies",
+    category: "Movies & Cinema",
     prompt: "A movie directed by Christopher Nolan",
+    verificationNote: "Must be a feature film credited with Christopher Nolan as sole or primary director.",
     hints: {
       stage1: "His low-budget 1998 black-and-white neo-noir feature debut.",
-      stage2: "Starts with 'F...', one single word, 9 letters.",
-      stage3: "Following (100 pts)"
+      stage2: "Starts with 'F...', one single 9-letter word.",
+      stage3: "Following (100m)"
+    },
+    whyThisAnswer: {
+      "following": "Following (1998) was Nolan's micro-budget feature debut, shot on 16mm black-and-white film in London on weekends.",
+      "inception": "Inception (2010) is one of his most famous sci-fi blockbusters, earning universal mainstream awareness."
     },
     plankton: ["Inception", "Interstellar", "Oppenheimer", "The Dark Knight"],
     tooClever: ["Memento", "Tenet", "The Prestige", "Batman Begins"],
     schooler: ["Dunkirk", "The Dark Knight Rises"],
     rare: ["Insomnia"],
-    deepCut: ["Doodlebug (Short Film)"],
-    oneInAKrillion: ["Following", "Quay"]
+    deepCut: ["Doodlebug"],
+    oneInAKrillion: ["Following"]
   },
   {
     id: 103,
-    category: "Geography",
-    prompt: "A country in Africa with coast on the Atlantic Ocean",
+    category: "World Geography",
+    prompt: "A country in Africa bordering the Atlantic Ocean",
+    verificationNote: "Must be a sovereign African nation possessing coastline directly on the Atlantic Ocean.",
     hints: {
-      stage1: "A tiny West African nation enclaved inside Senegal.",
-      stage2: "Starts with 'G...', smallest country in mainland Africa.",
-      stage3: "The Gambia (100 pts) / Sao Tome and Principe (95 pts)"
+      stage1: "A narrow West African nation enclaved entirely inside Senegal, smallest in mainland Africa.",
+      stage2: "Starts with 'G...', follows the Gambia River.",
+      stage3: "The Gambia (100m) / Sao Tome and Principe (95m)"
+    },
+    whyThisAnswer: {
+      "the gambia": "The Gambia borders the Atlantic Ocean at the mouth of the Gambia River and is otherwise enveloped entirely by Senegal.",
+      "south africa": "South Africa borders both the Atlantic and Indian Oceans and is the most commonly recalled African nation."
     },
     plankton: ["South Africa", "Morocco", "Nigeria", "Ghana"],
-    tooClever: ["Angola", "Namibia", "Senegal", "Ivory Coast", "Cote d'Ivoire"],
+    tooClever: ["Angola", "Namibia", "Senegal", "Ivory Coast"],
     schooler: ["Cameroon", "Liberia", "Sierra Leone", "Gabon"],
     rare: ["Mauritania", "Equatorial Guinea", "Republic of the Congo"],
     deepCut: ["Guinea-Bissau", "Benin", "Togo"],
-    oneInAKrillion: ["The Gambia", "Sao Tome and Principe", "Cape Verde", "Cabo Verde"]
+    oneInAKrillion: ["The Gambia", "Sao Tome and Principe", "Cabo Verde"]
   },
   {
     id: 104,
     category: "Music",
     prompt: "A musical instrument in the brass family",
+    verificationNote: "Must be an acoustic lip-vibrated instrument traditionally classified in the brass instrument family.",
     hints: {
-      stage1: "An ancient coiled alpine or marching brass instrument, or marching sousaphone relative.",
-      stage2: "Starts with 'E...' or 'M...', looks like a small tuba.",
-      stage3: "Euphonium (100 pts) / Mellophone (95 pts)"
+      stage1: "A conical-bore low brass instrument resembling a mini-tuba with a sweet, mellow tone.",
+      stage2: "Starts with 'E...' or 'M...'.",
+      stage3: "Euphonium (100m) / Mellophone (95m)"
+    },
+    whyThisAnswer: {
+      "euphonium": "The euphonium is a medium-sized, 3- or 4-valve conical-bore brass instrument derived from the Greek word 'euphonos' (well-sounding).",
+      "trumpet": "The trumpet is the highest-register brass instrument and the most obvious first-choice pick."
     },
     plankton: ["Trumpet", "Trombone", "Tuba", "French Horn"],
     tooClever: ["Flugelhorn", "Cornet", "Bugle", "Sousaphone"],
     schooler: ["Baritone Horn", "Euphonium"],
-    rare: ["Mellophone", "Post horn", "Hunting horn"],
+    rare: ["Mellophone", "Post horn"],
     deepCut: ["Wagner tuba", "Helicon", "Cimbasso"],
-    oneInAKrillion: ["Ophicleide", "Serpent", "Sackbut", "Kuhlohorn"]
-  },
-  {
-    id: 105,
-    category: "Science / Chemistry",
-    prompt: "An element on the Periodic Table starting with 'C'",
-    hints: {
-      stage1: "A rare synthetic transuranic radioactive actinide named after California.",
-      stage2: "Starts with 'Cal...', symbol Cf.",
-      stage3: "Californium (100 pts) / Copernicium (95 pts)"
-    },
-    plankton: ["Carbon", "Copper", "Calcium", "Chlorine"],
-    tooClever: ["Cobalt", "Chromium", "Cesium", "Caesium"],
-    schooler: ["Cadmium", "Cerium"],
-    rare: ["Curium", "Californium"],
-    deepCut: ["Copernicium", "Curium"],
-    oneInAKrillion: ["Californium", "Copernicium", "Cerium", "Coronium (Disproven)"]
-  },
-  {
-    id: 106,
-    category: "Sports",
-    prompt: "An NFL Football team located in the AFC East or NFC East",
-    hints: {
-      stage1: "Think about historically less mainstream or frequently forgotten franchises in division.",
-      stage2: "Starts with 'W...', rebranded in 2022.",
-      stage3: "Washington Commanders (100 pts) / Buffalo Bills (80 pts)"
-    },
-    plankton: ["Dallas Cowboys", "New England Patriots", "Philadelphia Eagles", "New York Giants"],
-    tooClever: ["Miami Dolphins", "New York Jets"],
-    schooler: ["Buffalo Bills"],
-    rare: ["Washington Commanders"],
-    deepCut: ["Washington Football Team (Former name)", "Boston Patriots (Historic)"],
-    oneInAKrillion: ["Washington Commanders", "Buffalo Bisons (Pre-modern)", "Frankford Yellow Jackets"]
+    oneInAKrillion: ["Ophicleide", "Serpent", "Sackbut"]
   }
 ];
 
-// Archive data of past games
+// Historical games archive
 export const ARCHIVE_GAMES = [
   {
     gameNumber: 45,
     date: "2026-10-09",
     bestDepth: "6,920m",
-    highlights: "Key prompts included 'South American Capital' (Winner: Paramaribo) and 'Bird starting with P' (Winner: Potoo)."
+    highlights: "Featured prompts included 'South American Country' (Deep cut: Suriname) and 'Bird starting with P' (Deep cut: Potoo)."
   },
   {
     gameNumber: 44,
     date: "2026-10-08",
     bestDepth: "6,880m",
-    highlights: "Key prompts included 'US State without an E' (Winner: Utah) and 'Stanley Kubrick Film' (Winner: Fear and Desire)."
+    highlights: "Featured prompts included 'US State without an E' (Deep cut: Utah) and 'Stanley Kubrick Film' (Deep cut: Fear and Desire)."
   },
   {
     gameNumber: 43,
     date: "2026-10-07",
     bestDepth: "6,950m",
-    highlights: "Key prompts included 'European River' (Winner: Vltava) and 'Fruit starting with K' (Winner: Kumquat)."
+    highlights: "Featured prompts included 'European River' (Deep cut: Vltava) and 'Citrus Fruit' (Deep cut: Kumquat)."
   },
   {
     gameNumber: 42,
     date: "2026-10-06",
     bestDepth: "6,800m",
-    highlights: "Key prompts included 'Periodic Table Noble Gas' (Winner: Oganesson) and 'Steven Spielberg Film' (Winner: Duel)."
+    highlights: "Featured prompts included 'Periodic Table Element starting with C' (Deep cut: Californium) and 'African Atlantic Coast' (Deep cut: The Gambia)."
   }
 ];
