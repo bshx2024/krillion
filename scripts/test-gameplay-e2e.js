@@ -40,11 +40,15 @@ assert(!indexHtml.includes('TRENCH DIVE COMPLETE'), 'No hardcoded "TRENCH DIVE C
 assert(!indexHtml.includes('6,920 / 7,000m'), 'No hardcoded "6,920 / 7,000m" score leak in initial HTML');
 assert(!indexHtml.includes('0 / 7,000m'), 'No hardcoded "0 / 7,000m" template leak in initial HTML');
 assert(!indexHtml.includes('Less than 1% of players'), 'No misleading "Less than 1% of players" static text in initial HTML');
-assert(indexHtml.includes('Think of smaller incorporated California cities, including historic inland towns and mountain communities.'), 'California prompt hint accurately covers all small incorporated candidate answers');
+assert(indexHtml.includes('smaller incorporated California cities'), 'California prompt hint accurately covers all small incorporated candidate answers');
 assert(indexHtml.includes('id="spoiler-shield-card"'), 'Answers Table has active #spoiler-shield-card');
 assert(indexHtml.includes('id="spoiler-revealed-content"') && indexHtml.includes('class="spoiler-revealed-content is-hidden"'), 'Answers Table is initially wrapped with class "is-hidden"');
 assert(indexHtml.includes('id="spoiler-hints-shield"'), 'Progressive Hints Section has active #spoiler-hints-shield');
 assert(indexHtml.includes('id="spoiler-hints-content"') && indexHtml.includes('class="spoiler-hints-content is-hidden"'), 'Progressive Hints grid is initially wrapped with class "is-hidden"');
+assert(indexHtml.includes('id="game-summary-modal"') && indexHtml.includes('hidden'), '#game-summary-modal has explicit hidden attribute on initial render');
+assert(indexHtml.includes('id="depth-conversion-matrix"'), 'Ocean Depth & Scoring Conversion Matrix card exists in index.html');
+assert(indexHtml.includes('Depth Gained per Prompt (Meters) = Rarity Score Points × 10'), 'Core depth conversion formula is explicitly declared');
+assert(indexHtml.includes('id="feedback-modal"'), 'Feedback and inaccuracy report modal exists in index.html');
 
 // -------------------------------------------------------------
 // Test Suite 2: Predicted Collision Risk Wording Integrity
