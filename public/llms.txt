@@ -31,8 +31,9 @@ Unlike traditional trivia games that reward common popular answers, Krillion awa
    - One in a Krillion (Predicted 100 pts): Death Proof, My Best Friend's Birthday
    - Too Clever Trap (Predicted 15 pts): Reservoir Dogs, Once Upon a Time in Hollywood, The Hateful Eight
 4. A country that borders Germany:
-   - One in a Krillion (Predicted 100 pts): Luxembourg
-   - Too Clever Trap (Predicted 15 pts): Netherlands, Belgium, Czech Republic
+   - Rule: Must be one of the exactly 9 recognized sovereign nations sharing a terrestrial land border with Germany.
+   - One in a Krillion (Predicted 100 pts): Luxembourg, Denmark
+   - Too Clever Trap (Predicted 15 pts): Netherlands, The Netherlands, Austria
 5. A pasta shape or variety:
    - One in a Krillion (Predicted 100 pts): Campanelle, Culurgiones, Busiate, Trofie, Casoncelli
    - Too Clever Trap (Predicted 15 pts): Ravioli, Gnocchi, Orzo, Farfalle, Rigatoni

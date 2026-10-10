@@ -269,10 +269,14 @@
                   class="game-input-field" 
                   placeholder="Type your rarest valid answer..." 
                   autofocus
+                  autocomplete="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                  inputmode="text"
                   required
                 >
                 <div class="typo-suggestion-tip" id="typo-tip" style="display: none;">
-                  Did you mean: <strong id="typo-suggestion-word"></strong>? (Click or Tab to apply)
+                  Did you mean: <strong id="typo-suggestion-word"></strong>? <button type="button" class="btn-link" id="apply-typo-btn">(Apply)</button> | <button type="button" class="btn-link text-muted" id="dismiss-typo-btn">Keep mine</button>
                 </div>
               </div>
               <button type="submit" class="btn btn-primary submit-dive-btn" id="submit-answer-btn">
@@ -343,25 +347,44 @@
           </p>
         </div>
 
-        <div class="table-responsive-wrapper">
-          <table class="krillion-direct-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Category</th>
-                <th>Daily Krillion Prompt</th>
-                <th>Verification Rule</th>
-                <th>Predicted Rare (100 Pts Trench)*</th>
-                <th>Predicted Trap: "Too Clever" (15 Pts)*</th>
-                <th>Predicted Common: Plankton (&lt;10 Pts)</th>
-              </tr>
-            </thead>
-            <tbody>
+        <!-- Spoiler Protection Banner -->
+        <div class="spoiler-shield-card" id="spoiler-shield-card">
+          <div class="shield-content">
+            <span class="shield-badge">🛡️ SPOILER PROTECTION ACTIVE</span>
+            <h3 class="shield-title">Don't Spoil Your Daily Challenge!</h3>
+            <p class="shield-desc">
+              Answers and hints for today's Game #46 are hidden by default to keep the reverse-trivia challenge fun and fair. Dive into today's game first before checking solutions!
+            </p>
+          </div>
+          <div class="shield-btn-group">
+            <a href="#game-section" class="btn btn-primary" id="shield-play-btn">🤿 Play Today's Game First</a>
+            <button class="btn btn-secondary" id="toggle-spoiler-btn">👁️ Reveal Today's Answers (Spoilers)</button>
+          </div>
+        </div>
+
+        <div class="spoiler-revealed-content is-hidden" id="spoiler-revealed-content">
+          <div class="table-responsive-wrapper">
+            <table class="krillion-direct-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Category</th>
+                  <th>Daily Krillion Prompt</th>
+                  <th>Verification Rule</th>
+                  <th>Predicted Rare (100 Pts Trench)*</th>
+                  <th>Predicted Trap: "Too Clever" (15 Pts)*</th>
+                  <th>Predicted Common: Plankton (&lt;10 Pts)</th>
+                </tr>
+              </thead>
+              <tbody>
               <tr>
                 <td><strong>1</strong></td>
                 <td><span class="cat-pill">Geography</span></td>
                 <td>A city in California</td>
-                <td><span class="text-muted">Verified entity</span></td>
+                <td>
+                  <span class="text-muted">Verified entity</span>
+                  
+                </td>
                 <td><strong class="text-glow">Ojai</strong>, Weed, Yreka</td>
                 <td><span class="text-warning">Sacramento, Oakland, Pasadena</span></td>
                 <td><span class="text-muted">Los Angeles, San Francisco, San Diego</span></td>
@@ -370,7 +393,10 @@
                 <td><strong>2</strong></td>
                 <td><span class="cat-pill">Biology / Animals</span></td>
                 <td>A mammal starting with the letter 'B'</td>
-                <td><span class="text-muted">Verified entity</span></td>
+                <td>
+                  <span class="text-muted">Verified entity</span>
+                  
+                </td>
                 <td><strong class="text-glow">Binturong</strong>, Bilby, Bassariscus</td>
                 <td><span class="text-warning">Baboon, Buffalo, Bonobo</span></td>
                 <td><span class="text-muted">Bear, Bat, Beaver</span></td>
@@ -379,7 +405,10 @@
                 <td><strong>3</strong></td>
                 <td><span class="cat-pill">Movies & Cinema</span></td>
                 <td>A movie directed by Quentin Tarantino</td>
-                <td><span class="text-muted">Verified entity</span></td>
+                <td>
+                  <span class="text-muted">Verified entity</span>
+                  
+                </td>
                 <td><strong class="text-glow">Death Proof</strong>, My Best Friend's Birthday</td>
                 <td><span class="text-warning">Reservoir Dogs, Once Upon a Time in Hollywood, The Hateful Eight</span></td>
                 <td><span class="text-muted">Pulp Fiction, Kill Bill, Django Unchained</span></td>
@@ -388,16 +417,22 @@
                 <td><strong>4</strong></td>
                 <td><span class="cat-pill">World Geography</span></td>
                 <td>A country that borders Germany</td>
-                <td><span class="text-muted">Verified entity</span></td>
-                <td><strong class="text-glow">Luxembourg</strong></td>
-                <td><span class="text-warning">Netherlands, Belgium, Czech Republic</span></td>
-                <td><span class="text-muted">France, Poland, Austria</span></td>
+                <td>
+                  <span class="text-muted">Must be one of the exactly 9 recognized sovereign nations sharing a terrestrial land border with Germany.</span>
+                  <br><small class="text-muted" style="font-size:0.75rem; opacity:0.8;">Source: Federal Agency for Cartography and Geodesy (BKG) & ISO 3166-1 (October 10, 2026)</small>
+                </td>
+                <td><strong class="text-glow">Luxembourg</strong>, Denmark</td>
+                <td><span class="text-warning">Netherlands, The Netherlands, Austria</span></td>
+                <td><span class="text-muted">France, Switzerland, Poland</span></td>
               </tr>
               <tr>
                 <td><strong>5</strong></td>
                 <td><span class="cat-pill">Food & Cuisine</span></td>
                 <td>A pasta shape or variety</td>
-                <td><span class="text-muted">Verified entity</span></td>
+                <td>
+                  <span class="text-muted">Verified entity</span>
+                  
+                </td>
                 <td><strong class="text-glow">Campanelle</strong>, Culurgiones, Busiate</td>
                 <td><span class="text-warning">Ravioli, Gnocchi, Orzo</span></td>
                 <td><span class="text-muted">Spaghetti, Penne, Fettuccine</span></td>
@@ -406,7 +441,10 @@
                 <td><strong>6</strong></td>
                 <td><span class="cat-pill">Sports & Olympics</span></td>
                 <td>A Summer Olympic sport / event</td>
-                <td><span class="text-muted">Verified entity</span></td>
+                <td>
+                  <span class="text-muted">Verified entity</span>
+                  
+                </td>
                 <td><strong class="text-glow">Modern Pentathlon</strong>, Canoe Slalom, Keirin</td>
                 <td><span class="text-warning">Archery, Fencing, Badminton</span></td>
                 <td><span class="text-muted">Swimming, Athletics, Gymnastics</span></td>
@@ -415,16 +453,24 @@
                 <td><strong>7</strong></td>
                 <td><span class="cat-pill">Music & Band Members</span></td>
                 <td>An official member of the British rock band Queen</td>
-                <td><span class="text-muted">Must be one of the four permanent official core recording members of Queen (1971–present).</span></td>
+                <td>
+                  <span class="text-muted">Must be one of the four permanent official core recording members of Queen (1971–present).</span>
+                  <br><small class="text-muted" style="font-size:0.75rem; opacity:0.8;">Source: Official Queen Online Archives & Rock and Roll Hall of Fame Lineup Record (October 10, 2026)</small>
+                </td>
                 <td><strong class="text-glow">John Deacon</strong></td>
                 <td><span class="text-warning">Brian May</span></td>
                 <td><span class="text-muted">Freddie Mercury</span></td>
               </tr>
             </tbody>
-          </table>
-          <p class="text-muted" style="margin-top: 0.75rem; font-size: 0.85rem; line-height: 1.5;">
-            * <em>Rarity Transparency Note: Depth points and rarity tiers on Krillion.click are derived from an algorithmic prediction model (evaluating general language search frequency against long-tail encyclopedic cataloging). Scores provide an objective, reproducible measure of obscurity and do not represent proprietary live player sample telemetry.</em>
-          </p>
+            </table>
+            <p class="text-muted" style="margin-top: 0.75rem; font-size: 0.85rem; line-height: 1.5;">
+              * <em>Rarity Transparency Note: Depth points and rarity tiers on Krillion.click are derived from an algorithmic prediction model (evaluating general language search frequency against long-tail encyclopedic cataloging). Scores provide an objective, reproducible measure of obscurity and do not represent proprietary live player sample telemetry.</em>
+            </p>
+          </div>
+          <div class="table-utility-bar">
+            <button class="btn btn-sm btn-ghost" id="open-feedback-btn">🚩 Report Inaccuracy / Suggest Obscure Answer</button>
+            <span class="verification-meta">Verified: October 10, 2026 • Primary Sources: BKG, IUCN, Queen Band Archive</span>
+          </div>
         </div>
       </div>
     </section>
@@ -510,7 +556,7 @@
             </details>
             <details class="hint-detail">
               <summary class="hint-summary">🔤 Letter Count Clue</summary>
-              <div class="hint-body">Starts with 'L...', tiny European microstate.</div>
+              <div class="hint-body">Starts with 'L...' or 'D...', small sovereign neighbor.</div>
             </details>
             <details class="hint-detail reveal-gold">
               <summary class="hint-summary">🎯 Rare Krillion Answer</summary>
@@ -763,9 +809,49 @@
       </div>
     </div>
     <div class="container footer-bottom">
-      <p>© 2026 Krillion.click. Fan-created companion tool. All trademarks belong to their respective creators.</p>
+      <p>© 2026 Krillion.click. <strong>Independent Fan Project Disclaimer:</strong> Krillion.click is an independent educational solver and practice simulator created for trivia enthusiasts. It is not affiliated with, sponsored by, or endorsed by the creators of Krillion or The Daily Dive. All game names and trademarks belong to their respective copyright holders.</p>
     </div>
   </footer>
+
+  <!-- Feedback & Inaccuracy Report Modal -->
+  <div class="modal-overlay" id="feedback-modal" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">🚩 Report Inaccuracy / Suggest Obscure Answer</h3>
+        <button class="modal-close-btn" id="close-feedback-btn">&times;</button>
+      </div>
+      <form id="feedback-form" class="modal-body">
+        <label for="feedback-prompt-select">Select Prompt:</label>
+        <select id="feedback-prompt-select" class="form-select" required>
+          <option value="1">Prompt 1: A city in California</option>
+          <option value="2">Prompt 2: A mammal starting with 'B'</option>
+          <option value="3">Prompt 3: A movie directed by Quentin Tarantino</option>
+          <option value="4">Prompt 4: A country that borders Germany</option>
+          <option value="5">Prompt 5: A pasta shape or variety</option>
+          <option value="6">Prompt 6: A Summer Olympic sport / event</option>
+          <option value="7">Prompt 7: An official member of Queen</option>
+        </select>
+
+        <label for="feedback-type-select" style="margin-top: 1rem; display:block;">Feedback Type:</label>
+        <select id="feedback-type-select" class="form-select" required>
+          <option value="missing">Suggest Missing Obscure / Rare Answer</option>
+          <option value="inaccuracy">Factual Inaccuracy or Rule Discrepancy</option>
+          <option value="rarity">Dispute Predicted Rarity Tier</option>
+        </select>
+
+        <label for="feedback-answer-input" style="margin-top: 1rem; display:block;">Suggested Answer / Entity:</label>
+        <input type="text" id="feedback-answer-input" class="form-input" placeholder="e.g. Dunsmuir, Keirin, Denmark" required>
+
+        <label for="feedback-source-input" style="margin-top: 1rem; display:block;">Verification Source / Reference (Optional):</label>
+        <textarea id="feedback-source-input" class="form-textarea" rows="3" placeholder="e.g. ISO 3166-1, IUCN Red List, Official Album Credits..."></textarea>
+
+        <div class="modal-footer" style="margin-top: 1.5rem;">
+          <button type="button" class="btn btn-ghost" id="cancel-feedback-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="submit-feedback-btn">Submit Feedback</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <script type="module" src="/app.js"></script>
 </body>

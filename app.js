@@ -336,11 +336,94 @@ class KrillionGameController {
       this.answerInput.focus();
     });
 
-    // Submit answer form
+    // Submit answer form with double-submit guard
+    this.isSubmitting = false;
     this.inputForm.addEventListener('submit', (e) => {
       e.preventDefault();
       this.handleSubmit();
     });
+
+    // Dismiss & Apply typo buttons
+    const dismissTypo = document.getElementById('dismiss-typo-btn');
+    if (dismissTypo) {
+      dismissTypo.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.typoTip.style.display = 'none';
+      });
+    }
+    const applyTypo = document.getElementById('apply-typo-btn');
+    if (applyTypo) {
+      applyTypo.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.answerInput.value = this.typoWord.textContent;
+        this.typoTip.style.display = 'none';
+        this.answerInput.focus();
+      });
+    }
+
+    // Spoiler Protection Toggle
+    const spoilerBtn = document.getElementById('toggle-spoiler-btn');
+    const spoilerContent = document.getElementById('spoiler-revealed-content');
+    if (spoilerBtn && spoilerContent) {
+      spoilerBtn.addEventListener('click', () => {
+        const isHidden = spoilerContent.classList.contains('is-hidden');
+        if (isHidden) {
+          spoilerContent.classList.remove('is-hidden');
+          spoilerBtn.textContent = '🔒 Hide Today\'s Answers (Protect Spoilers)';
+        } else {
+          spoilerContent.classList.add('is-hidden');
+          spoilerBtn.textContent = '👁️ Reveal Today\'s Answers (Spoilers)';
+        }
+      });
+    }
+
+    // Feedback & Inaccuracy Report Modal Handlers
+    const openFeedbackBtn = document.getElementById('open-feedback-btn');
+    const feedbackModal = document.getElementById('feedback-modal');
+    const closeFeedbackBtn = document.getElementById('close-feedback-btn');
+    const cancelFeedbackBtn = document.getElementById('cancel-feedback-btn');
+    const feedbackForm = document.getElementById('feedback-form');
+
+    if (openFeedbackBtn && feedbackModal) {
+      openFeedbackBtn.addEventListener('click', () => {
+        feedbackModal.style.display = 'flex';
+      });
+      if (closeFeedbackBtn) {
+        closeFeedbackBtn.addEventListener('click', () => {
+          feedbackModal.style.display = 'none';
+        });
+      }
+      if (cancelFeedbackBtn) {
+        cancelFeedbackBtn.addEventListener('click', () => {
+          feedbackModal.style.display = 'none';
+        });
+      }
+      feedbackModal.addEventListener('click', (e) => {
+        if (e.target === feedbackModal) {
+          feedbackModal.style.display = 'none';
+        }
+      });
+      if (feedbackForm) {
+        feedbackForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const entry = {
+            promptId: document.getElementById('feedback-prompt-select').value,
+            type: document.getElementById('feedback-type-select').value,
+            answer: document.getElementById('feedback-answer-input').value,
+            source: document.getElementById('feedback-source-input').value,
+            timestamp: new Date().toISOString()
+          };
+          try {
+            const list = JSON.parse(localStorage.getItem('krillion_feedback') || '[]');
+            list.push(entry);
+            localStorage.setItem('krillion_feedback', JSON.stringify(list));
+          } catch (err) {}
+          feedbackModal.style.display = 'none';
+          feedbackForm.reset();
+          alert('✅ Thank you! Your feedback has been recorded for expert review.');
+        });
+      }
+    }
 
     // Next Prompt button
     this.nextPromptBtn.addEventListener('click', () => {
@@ -398,6 +481,7 @@ class KrillionGameController {
     this.hintText.textContent = q.hints.stage1;
     this.hintContent.style.display = 'none';
 
+    this.isSubmitting = false;
     this.answerInput.value = '';
     this.answerInput.disabled = false;
     this.inputForm.style.display = 'flex';
@@ -656,6 +740,18 @@ Streak: ${updatedStats.streak} Days 🔥
 ${emojiBlocks}
 Test your obscurity: https://www.krillion.click`;
     this.shareTextArea.value = shareText;
+
+    // Automatically unlock spoiler protection so players who completed the game can review!
+    const spoilerContent = document.getElementById('spoiler-revealed-content');
+    const spoilerBtn = document.getElementById('toggle-spoiler-btn');
+    if (spoilerContent && spoilerBtn) {
+      spoilerContent.classList.remove('is-hidden');
+      spoilerBtn.textContent = '🔒 Hide Today\'s Answers';
+      const shieldTitle = document.querySelector('.shield-title');
+      if (shieldTitle) {
+        shieldTitle.textContent = '🎉 Dive Completed! Answers Unlocked';
+      }
+    }
 
     this.summaryModal.style.display = 'flex';
   }

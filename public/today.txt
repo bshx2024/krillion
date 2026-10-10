@@ -15,8 +15,9 @@ Evaluation Note: Rarity tiers represent an open heuristic prediction model (ling
 - Avoid Too Clever Trap (Predicted 15 Pts): Reservoir Dogs, Once Upon a Time in Hollywood, The Hateful Eight
 
 4. Prompt: A country that borders Germany
-- Top Rare Answers (Predicted 100 Pts): Luxembourg
-- Avoid Too Clever Trap (Predicted 15 Pts): Netherlands, Belgium, Czech Republic
+- Rule: Must be one of the exactly 9 recognized sovereign nations sharing a terrestrial land border with Germany.
+- Top Rare Answers (Predicted 100 Pts): Luxembourg, Denmark
+- Avoid Too Clever Trap (Predicted 15 Pts): Netherlands, The Netherlands, Austria
 
 5. Prompt: A pasta shape or variety
 - Top Rare Answers (Predicted 100 Pts): Campanelle, Culurgiones, Busiate, Trofie, Casoncelli

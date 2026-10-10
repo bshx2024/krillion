@@ -116,7 +116,10 @@ ${prompts.map((p, idx) => `              <tr>
                 <td><strong>${idx + 1}</strong></td>
                 <td><span class="cat-pill">${p.category}</span></td>
                 <td>${p.prompt}</td>
-                <td><span class="text-muted">${p.verificationNote || 'Verified entity'}</span></td>
+                <td>
+                  <span class="text-muted">${p.verificationNote || 'Verified entity'}</span>
+                  ${p.factSource ? `<br><small class="text-muted" style="font-size:0.75rem; opacity:0.8;">Source: ${p.factSource} (${p.verifiedDate || '2026-10-10'})</small>` : ''}
+                </td>
                 <td><strong class="text-glow">${p.oneInAKrillion[0]}</strong>${p.oneInAKrillion.length > 1 ? ', ' + p.oneInAKrillion.slice(1, 3).join(', ') : ''}</td>
                 <td><span class="text-warning">${p.tooClever.slice(0, 3).join(', ')}</span></td>
                 <td><span class="text-muted">${p.plankton.slice(0, 3).join(', ')}</span></td>
@@ -215,5 +218,17 @@ if (!queenPrompt || !queenPrompt.oneInAKrillion.includes('John Deacon')) {
   process.exit(1);
 }
 console.log('  ✓ Assertion Passed: Queen answer is John Deacon.');
+
+// Check 6: Germany prompt covers Luxembourg & Denmark and excludes Liechtenstein
+const germanyPrompt = prompts.find(p => p.id === 4 || p.prompt.includes('Germany'));
+if (!germanyPrompt || !germanyPrompt.oneInAKrillion.includes('Luxembourg') || !germanyPrompt.oneInAKrillion.includes('Denmark')) {
+  console.error('❌ ASSERTION FAILED: Germany prompt must contain Luxembourg and Denmark as top rare answers');
+  process.exit(1);
+}
+if (germanyPrompt.oneInAKrillion.includes('Liechtenstein') || germanyPrompt.rare.includes('Liechtenstein')) {
+  console.error('❌ ASSERTION FAILED: Liechtenstein does not border Germany and cannot be in positive score tiers');
+  process.exit(1);
+}
+console.log('  ✓ Assertion Passed: Germany borders full coverage (Luxembourg, Denmark verified; Liechtenstein excluded).');
 
 console.log('\n🎉 ALL INTEGRITY ASSERTIONS PASSED! Data sources are 100% unified.\n');

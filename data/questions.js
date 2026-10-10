@@ -143,34 +143,36 @@ export const DAILY_GAME_DATA = {
         "id": 4,
         "category": "World Geography",
         "prompt": "A country that borders Germany",
+        "verificationNote": "Must be one of the exactly 9 recognized sovereign nations sharing a terrestrial land border with Germany.",
+        "factSource": "Federal Agency for Cartography and Geodesy (BKG) & ISO 3166-1",
+        "verifiedDate": "October 10, 2026",
+        "modelRationale": "All 9 valid border countries are scored via linguistic search frequency. Luxembourg and Denmark are least cited in border trivia contexts, while France and Switzerland are top-of-mind.",
         "hints": {
             "stage1": "Think about the smallest landlocked duchy or the northern peninsula border.",
-            "stage2": "Starts with 'L...', tiny European microstate.",
-            "stage3": "Luxembourg (100 pts) / Denmark (90 pts)"
+            "stage2": "Starts with 'L...' or 'D...', small sovereign neighbor.",
+            "stage3": "Luxembourg (100 pts) / Denmark (100 pts)"
         },
         "plankton": [
             "France",
-            "Poland",
-            "Austria",
-            "Switzerland"
+            "Switzerland",
+            "Poland"
         ],
         "tooClever": [
             "Netherlands",
+            "The Netherlands",
+            "Austria"
+        ],
+        "schooler": [
+            "Czechia"
+        ],
+        "rare": [
             "Belgium",
             "Czech Republic"
         ],
-        "schooler": [
-            "Czechia",
-            "The Netherlands"
-        ],
-        "rare": [
-            "Denmark"
-        ],
-        "deepCut": [
-            "Liechtenstein (TRICK: Does NOT border Germany directly!)"
-        ],
+        "deepCut": [],
         "oneInAKrillion": [
-            "Luxembourg"
+            "Luxembourg",
+            "Denmark"
         ]
     },
     {
@@ -277,6 +279,9 @@ export const DAILY_GAME_DATA = {
         "category": "Music & Band Members",
         "prompt": "An official member of the British rock band Queen",
         "verificationNote": "Must be one of the four permanent official core recording members of Queen (1971–present).",
+        "factSource": "Official Queen Online Archives & Rock and Roll Hall of Fame Lineup Record",
+        "verifiedDate": "October 10, 2026",
+        "modelRationale": "John Deacon wrote 'Another One Bites the Dust' but retired from music in 1997, giving him the lowest linguistic top-of-mind score compared to active members May and Taylor.",
         "hints": {
             "stage1": "The bassist who retired from music in 1997 and wrote 'Another One Bites the Dust'.",
             "stage2": "Starts with 'J...', 4-letter first name, 6-letter surname.",
