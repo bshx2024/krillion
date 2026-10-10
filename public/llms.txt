@@ -4,16 +4,16 @@
 > Updated: 2026-10-10
 
 ## Overview & Two-Tier Verification Methodology
-Krillion (The Daily Dive) is a web-based reverse-trivia daily puzzle.
+Krillion is a web-based reverse-trivia daily challenge.
 Players receive 7 daily prompts with a 25-second countdown per prompt.
-Unlike traditional trivia games that reward common popular answers, Krillion awards depth points based on rarity (up to 100 per prompt, 700 max, representing a descent to 7,000 meters in the ocean trench).
+Unlike traditional trivia games that reward common popular answers, Krillion awards depth points based on obscurity (up to 100 per prompt, 700 max, representing a descent to 7,000 meters in the ocean trench).
 
 ### Two-Tier Evaluation Architecture:
 1. Tier 1 (Fact-Check Validity): Is the answer an objectively recognized entity meeting the prompt criteria? (e.g. For "Borders Germany", all 9 bordering countries are valid; Liechtenstein is invalid).
-2. Tier 2 (Rarity Index): Evaluated via heuristic rarity modeling (top-of-mind linguistic frequency vs. long-tail obscure cataloging).
+2. Tier 2 (Predicted Rarity Index): Evaluated via heuristic rarity modeling (top-of-mind linguistic frequency vs. long-tail obscure cataloging). Note: Scores represent an algorithmic model, not proprietary real-time player telemetry.
 
-## Scoring Tiers
-- Plankton (4–10 pts): The most common, obvious answers (e.g., Los Angeles for a California city).
+## Scoring Tiers (Predicted Model)
+- Plankton (4–10 pts): The most common, obvious answers (e.g., Los Angeles for California city).
 - Too Clever (8–15 pts): Overthought answers where many trivia players collide trying to sound smart (e.g., Sacramento, Pasadena).
 - Schooler (16–30 pts): Mid-tier answers.
 - Rare (32–60 pts): Answers selected by only a minority of players.
@@ -22,23 +22,24 @@ Unlike traditional trivia games that reward common popular answers, Krillion awa
 
 ## Today's Daily Dive Answers (October 10, 2026 - Game #46)
 1. A city in California:
-   - One in a Krillion: Ojai, Weed, Yreka, Dunsmuir, Point Arena (100 pts)
-   - Too Clever Trap: Sacramento, Oakland, Pasadena, Berkeley, Fresno (15 pts)
+   - One in a Krillion (Predicted 100 pts): Ojai, Weed, Yreka, Dunsmuir, Point Arena
+   - Too Clever Trap (Predicted 15 pts): Sacramento, Oakland, Pasadena, Berkeley, Fresno
 2. A mammal starting with the letter 'B':
-   - One in a Krillion: Binturong, Bilby, Bassariscus, Beira, Bison antiquus (100 pts)
-   - Too Clever Trap: Baboon, Buffalo, Bonobo, Blue Whale (15 pts)
+   - One in a Krillion (Predicted 100 pts): Binturong, Bilby, Bassariscus, Beira, Bison antiquus
+   - Too Clever Trap (Predicted 15 pts): Baboon, Buffalo, Bonobo, Blue Whale
 3. A movie directed by Quentin Tarantino:
-   - One in a Krillion: Death Proof, My Best Friend's Birthday (100 pts)
-   - Too Clever Trap: Reservoir Dogs, Once Upon a Time in Hollywood, The Hateful Eight (15 pts)
+   - One in a Krillion (Predicted 100 pts): Death Proof, My Best Friend's Birthday
+   - Too Clever Trap (Predicted 15 pts): Reservoir Dogs, Once Upon a Time in Hollywood, The Hateful Eight
 4. A country that borders Germany:
-   - One in a Krillion: Luxembourg (100 pts)
-   - Too Clever Trap: Netherlands, Belgium, Czech Republic (15 pts)
+   - One in a Krillion (Predicted 100 pts): Luxembourg
+   - Too Clever Trap (Predicted 15 pts): Netherlands, Belgium, Czech Republic
 5. A pasta shape or variety:
-   - One in a Krillion: Campanelle, Culurgiones, Busiate, Trofie, Casoncelli (100 pts)
-   - Too Clever Trap: Ravioli, Gnocchi, Orzo, Farfalle, Rigatoni (15 pts)
+   - One in a Krillion (Predicted 100 pts): Campanelle, Culurgiones, Busiate, Trofie, Casoncelli
+   - Too Clever Trap (Predicted 15 pts): Ravioli, Gnocchi, Orzo, Farfalle, Rigatoni
 6. A Summer Olympic sport / event:
-   - One in a Krillion: Modern Pentathlon, Canoe Slalom, Keirin, Omnium, Skeet Shooting (100 pts)
-   - Too Clever Trap: Archery, Fencing, Badminton, Table Tennis, Skateboarding (15 pts)
+   - One in a Krillion (Predicted 100 pts): Modern Pentathlon, Canoe Slalom, Keirin, Omnium, Skeet Shooting
+   - Too Clever Trap (Predicted 15 pts): Archery, Fencing, Badminton, Table Tennis, Skateboarding
 7. An official member of the British rock band Queen:
-   - One in a Krillion: John Deacon (100 pts)
-   - Too Clever Trap: Brian May (15 pts)
+   - Rule: Must be one of the four permanent official core recording members of Queen (1971–present).
+   - One in a Krillion (Predicted 100 pts): John Deacon
+   - Too Clever Trap (Predicted 15 pts): Brian May

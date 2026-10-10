@@ -563,9 +563,9 @@ class KrillionGameController {
 
     // Render feedback
     this.feedbackBadge.className = `feedback-tier-badge ${badgeClass}`;
-    this.feedbackBadge.textContent = tier;
+    this.feedbackBadge.textContent = `${tier} • PREDICTED MODEL`;
     this.feedbackPoints.textContent = `+${points} Points (+${depthGained}m Depth)`;
-    this.feedbackExplanation.textContent = explanation;
+    this.feedbackExplanation.innerHTML = `${explanation} <br><small class="text-muted" style="display:block; margin-top:4px;">(Evaluated via open linguistic frequency & catalog obscurity model, not proprietary live telemetry.)</small>`;
 
     if (this.whyBox && this.whyText) {
       this.whyText.textContent = educationalNote;
@@ -650,8 +650,8 @@ class KrillionGameController {
     // Generate Wordle/Krillion Share text (Spoiler-safe!)
     const emojiBlocks = this.sessionHistory.map(h => h.emoji).join('');
     const todayStr = new Date().toISOString().split('T')[0];
-    const shareText = `Krillion.click (${todayStr})
-Depth: ${this.totalDepth.toLocaleString()}m / 7,000m
+    const shareText = `Krillion.click (${todayStr}) • Predicted Depth Simulator
+Depth: ${this.totalDepth.toLocaleString()}m / 7,000m (Predicted Model)
 Streak: ${updatedStats.streak} Days 🔥
 ${emojiBlocks}
 Test your obscurity: https://www.krillion.click`;

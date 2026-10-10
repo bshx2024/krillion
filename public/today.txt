@@ -1,29 +1,32 @@
 Krillion Daily Dive - Answers & Hints for Today (October 10, 2026 - Game #46)
+Website: https://www.krillion.click/
+Evaluation Note: Rarity tiers represent an open heuristic prediction model (linguistic frequency vs. cataloging obscurity), not proprietary live telemetry.
 
 1. Prompt: A city in California
-- Top Rare Answers: Ojai, Weed, Yreka
-- Avoid Too Clever: Sacramento, Oakland, Pasadena
+- Top Rare Answers (Predicted 100 Pts): Ojai, Weed, Yreka, Dunsmuir, Point Arena
+- Avoid Too Clever Trap (Predicted 15 Pts): Sacramento, Oakland, Pasadena, Berkeley, Fresno
 
 2. Prompt: A mammal starting with the letter 'B'
-- Top Rare Answers: Binturong, Bilby, Bassariscus
-- Avoid Too Clever: Baboon, Buffalo, Bonobo
+- Top Rare Answers (Predicted 100 Pts): Binturong, Bilby, Bassariscus, Beira, Bison antiquus
+- Avoid Too Clever Trap (Predicted 15 Pts): Baboon, Buffalo, Bonobo, Blue Whale
 
 3. Prompt: A movie directed by Quentin Tarantino
-- Top Rare Answers: Death Proof, My Best Friend's Birthday
-- Avoid Too Clever: Reservoir Dogs, Once Upon a Time in Hollywood, The Hateful Eight
+- Top Rare Answers (Predicted 100 Pts): Death Proof, My Best Friend's Birthday
+- Avoid Too Clever Trap (Predicted 15 Pts): Reservoir Dogs, Once Upon a Time in Hollywood, The Hateful Eight
 
 4. Prompt: A country that borders Germany
-- Top Rare Answers: Luxembourg
-- Avoid Too Clever: Netherlands, Belgium, Czech Republic
+- Top Rare Answers (Predicted 100 Pts): Luxembourg
+- Avoid Too Clever Trap (Predicted 15 Pts): Netherlands, Belgium, Czech Republic
 
 5. Prompt: A pasta shape or variety
-- Top Rare Answers: Campanelle, Culurgiones, Busiate
-- Avoid Too Clever: Ravioli, Gnocchi, Orzo
+- Top Rare Answers (Predicted 100 Pts): Campanelle, Culurgiones, Busiate, Trofie, Casoncelli
+- Avoid Too Clever Trap (Predicted 15 Pts): Ravioli, Gnocchi, Orzo, Farfalle, Rigatoni
 
 6. Prompt: A Summer Olympic sport / event
-- Top Rare Answers: Modern Pentathlon, Canoe Slalom, Keirin
-- Avoid Too Clever: Archery, Fencing, Badminton
+- Top Rare Answers (Predicted 100 Pts): Modern Pentathlon, Canoe Slalom, Keirin, Omnium, Skeet Shooting
+- Avoid Too Clever Trap (Predicted 15 Pts): Archery, Fencing, Badminton, Table Tennis, Skateboarding
 
 7. Prompt: An official member of the British rock band Queen
-- Top Rare Answers: John Deacon
-- Avoid Too Clever: Brian May
+- Rule: Must be one of the four permanent official core recording members of Queen (1971–present).
+- Top Rare Answers (Predicted 100 Pts): John Deacon
+- Avoid Too Clever Trap (Predicted 15 Pts): Brian May

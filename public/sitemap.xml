@@ -7,39 +7,15 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.krillion.click/#game-console</loc>
+    <loc>https://www.krillion.click/today.txt</loc>
     <lastmod>2026-10-10</lastmod>
     <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.krillion.click/#today-answers</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.krillion.click/#too-clever</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.krillion.click/#categories</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.krillion.click/#methodology</loc>
-    <lastmod>2026-10-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.krillion.click/#archive</loc>
+    <loc>https://www.krillion.click/llms.txt</loc>
     <lastmod>2026-10-10</lastmod>
     <changefreq>daily</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
 </urlset>
