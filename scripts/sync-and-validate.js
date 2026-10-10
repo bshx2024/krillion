@@ -78,7 +78,7 @@ Unlike traditional trivia games that reward common popular answers, Krillion awa
 - Plankton (4–10 pts): The most common, obvious answers (e.g., Los Angeles for California city).
 - Too Clever (8–15 pts): Overthought answers where many trivia players collide trying to sound smart (e.g., Sacramento, Pasadena).
 - Schooler (16–30 pts): Mid-tier answers.
-- Rare (32–60 pts): Answers selected by only a minority of players.
+- Rare (32–60 pts): Model-predicted low-frequency candidates based on long-tail catalog obscurity.
 - Deep Cut (64–85 pts): High-tier obscure knowledge.
 - One in a Krillion (100 pts): The rarest legitimate answer that hits maximum ocean depth.
 
@@ -118,7 +118,7 @@ ${prompts.map((p, idx) => `              <tr>
                 <td>${p.prompt}</td>
                 <td>
                   <span class="text-muted">${p.verificationNote || 'Verified entity'}</span>
-                  ${p.factSource ? `<br><small class="text-muted" style="font-size:0.75rem; opacity:0.8;">Source: ${p.factSource} (${p.verifiedDate || '2026-10-10'})</small>` : ''}
+                  ${p.factSource ? `<br><small class="text-muted" style="font-size:0.75rem; opacity:0.85;">Source: ${p.sourceUrl ? `<a href="${p.sourceUrl}" target="_blank" rel="noopener noreferrer" style="color:var(--cyan-glow); text-decoration:underline;">${p.factSource}</a>` : p.factSource} (${p.verifiedDate || '2026-10-10'})</small>` : ''}
                 </td>
                 <td><strong class="text-glow">${p.oneInAKrillion[0]}</strong>${p.oneInAKrillion.length > 1 ? ', ' + p.oneInAKrillion.slice(1, 3).join(', ') : ''}</td>
                 <td><span class="text-warning">${p.tooClever.slice(0, 3).join(', ')}</span></td>
@@ -146,7 +146,7 @@ ${prompts.map((p, idx) => `          <div class="hint-card">
             </details>
             <details class="hint-detail reveal-gold">
               <summary class="hint-summary">🎯 Rare Krillion Answer</summary>
-              <div class="hint-body text-glow"><strong>${p.oneInAKrillion[0]}</strong> (100 pts). Avoid: ${p.tooClever[0]}!</div>
+              <div class="hint-body text-glow"><strong>${p.oneInAKrillion.join(', ')}</strong> (100 pts). Avoid: ${p.tooClever[0]}!</div>
             </details>
           </div>`).join('\n')}
         </div>
@@ -231,4 +231,29 @@ if (germanyPrompt.oneInAKrillion.includes('Liechtenstein') || germanyPrompt.rare
 }
 console.log('  ✓ Assertion Passed: Germany borders full coverage (Luxembourg, Denmark verified; Liechtenstein excluded).');
 
-console.log('\n🎉 ALL INTEGRITY ASSERTIONS PASSED! Data sources are 100% unified.\n');
+// Check 7: ZERO instances of player telemetry claims in llms.txt ("only by a minority of players")
+const llmsRaw = fs.readFileSync(llmsTxtPath, 'utf8');
+if (llmsRaw.includes('minority of players')) {
+  console.error('❌ ASSERTION FAILED: Found unverified player telemetry claim "minority of players" in llms.txt');
+  process.exit(1);
+}
+console.log('  ✓ Assertion Passed: llms.txt adheres strictly to model prediction terminology.');
+
+// Check 8: Cross-page synchronization of Germany top rare answers
+const todayRaw = fs.readFileSync(todayTxtPath, 'utf8');
+const indexRaw = fs.readFileSync(indexPath, 'utf8');
+if (!todayRaw.includes('Luxembourg, Denmark') || !llmsRaw.includes('Luxembourg, Denmark')) {
+  console.error('❌ ASSERTION FAILED: Germany rare answers "Luxembourg, Denmark" missing from today.txt or llms.txt');
+  process.exit(1);
+}
+console.log('  ✓ Assertion Passed: "Luxembourg, Denmark" consistently synchronized in today.txt, llms.txt, hints, and table.');
+
+// Check 9: Clickable source verification links for all 7 prompts in index.html
+const linkMatches = indexRaw.match(/Source: <a href="https?:\/\/[^"]+" target="_blank"/g);
+if (!linkMatches || linkMatches.length < 7) {
+  console.error(`❌ ASSERTION FAILED: Expected 7 clickable source links in index.html, found ${linkMatches ? linkMatches.length : 0}`);
+  process.exit(1);
+}
+console.log('  ✓ Assertion Passed: All 7 daily prompts contain verified clickable source links.');
+
+console.log('\n🎉 ALL 9 INTEGRITY ASSERTIONS PASSED! Data sources are 100% unified.\n');

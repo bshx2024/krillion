@@ -16,18 +16,21 @@ Unlike traditional trivia games that reward common popular answers, Krillion awa
 - Plankton (4–10 pts): The most common, obvious answers (e.g., Los Angeles for California city).
 - Too Clever (8–15 pts): Overthought answers where many trivia players collide trying to sound smart (e.g., Sacramento, Pasadena).
 - Schooler (16–30 pts): Mid-tier answers.
-- Rare (32–60 pts): Answers selected by only a minority of players.
+- Rare (32–60 pts): Model-predicted low-frequency candidates based on long-tail catalog obscurity.
 - Deep Cut (64–85 pts): High-tier obscure knowledge.
 - One in a Krillion (100 pts): The rarest legitimate answer that hits maximum ocean depth.
 
 ## Today's Daily Dive Answers (October 10, 2026 - Game #46)
 1. A city in California:
+   - Rule: Must be an officially incorporated municipality in the State of California.
    - One in a Krillion (Predicted 100 pts): Ojai, Weed, Yreka, Dunsmuir, Point Arena
    - Too Clever Trap (Predicted 15 pts): Sacramento, Oakland, Pasadena, Berkeley, Fresno
 2. A mammal starting with the letter 'B':
+   - Rule: Must be a recognized biological mammal species under class Mammalia with a common English name starting with 'B'.
    - One in a Krillion (Predicted 100 pts): Binturong, Bilby, Bassariscus, Beira, Bison antiquus
    - Too Clever Trap (Predicted 15 pts): Baboon, Buffalo, Bonobo, Blue Whale
 3. A movie directed by Quentin Tarantino:
+   - Rule: Must be a theatrically released feature film with Quentin Tarantino credited as director.
    - One in a Krillion (Predicted 100 pts): Death Proof, My Best Friend's Birthday
    - Too Clever Trap (Predicted 15 pts): Reservoir Dogs, Once Upon a Time in Hollywood, The Hateful Eight
 4. A country that borders Germany:
@@ -35,9 +38,11 @@ Unlike traditional trivia games that reward common popular answers, Krillion awa
    - One in a Krillion (Predicted 100 pts): Luxembourg, Denmark
    - Too Clever Trap (Predicted 15 pts): Netherlands, The Netherlands, Austria
 5. A pasta shape or variety:
+   - Rule: Must be a recognized authentic Italian pasta shape cataloged in official culinary registries.
    - One in a Krillion (Predicted 100 pts): Campanelle, Culurgiones, Busiate, Trofie, Casoncelli
    - Too Clever Trap (Predicted 15 pts): Ravioli, Gnocchi, Orzo, Farfalle, Rigatoni
 6. A Summer Olympic sport / event:
+   - Rule: Must be an official medal sport or discipline recognized by the International Olympic Committee (IOC).
    - One in a Krillion (Predicted 100 pts): Modern Pentathlon, Canoe Slalom, Keirin, Omnium, Skeet Shooting
    - Too Clever Trap (Predicted 15 pts): Archery, Fencing, Badminton, Table Tennis, Skateboarding
 7. An official member of the British rock band Queen:

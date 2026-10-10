@@ -3,14 +3,17 @@ Website: https://www.krillion.click/
 Evaluation Note: Rarity tiers represent an open heuristic prediction model (linguistic frequency vs. cataloging obscurity), not proprietary live telemetry.
 
 1. Prompt: A city in California
+- Rule: Must be an officially incorporated municipality in the State of California.
 - Top Rare Answers (Predicted 100 Pts): Ojai, Weed, Yreka, Dunsmuir, Point Arena
 - Avoid Too Clever Trap (Predicted 15 Pts): Sacramento, Oakland, Pasadena, Berkeley, Fresno
 
 2. Prompt: A mammal starting with the letter 'B'
+- Rule: Must be a recognized biological mammal species under class Mammalia with a common English name starting with 'B'.
 - Top Rare Answers (Predicted 100 Pts): Binturong, Bilby, Bassariscus, Beira, Bison antiquus
 - Avoid Too Clever Trap (Predicted 15 Pts): Baboon, Buffalo, Bonobo, Blue Whale
 
 3. Prompt: A movie directed by Quentin Tarantino
+- Rule: Must be a theatrically released feature film with Quentin Tarantino credited as director.
 - Top Rare Answers (Predicted 100 Pts): Death Proof, My Best Friend's Birthday
 - Avoid Too Clever Trap (Predicted 15 Pts): Reservoir Dogs, Once Upon a Time in Hollywood, The Hateful Eight
 
@@ -20,10 +23,12 @@ Evaluation Note: Rarity tiers represent an open heuristic prediction model (ling
 - Avoid Too Clever Trap (Predicted 15 Pts): Netherlands, The Netherlands, Austria
 
 5. Prompt: A pasta shape or variety
+- Rule: Must be a recognized authentic Italian pasta shape cataloged in official culinary registries.
 - Top Rare Answers (Predicted 100 Pts): Campanelle, Culurgiones, Busiate, Trofie, Casoncelli
 - Avoid Too Clever Trap (Predicted 15 Pts): Ravioli, Gnocchi, Orzo, Farfalle, Rigatoni
 
 6. Prompt: A Summer Olympic sport / event
+- Rule: Must be an official medal sport or discipline recognized by the International Olympic Committee (IOC).
 - Top Rare Answers (Predicted 100 Pts): Modern Pentathlon, Canoe Slalom, Keirin, Omnium, Skeet Shooting
 - Avoid Too Clever Trap (Predicted 15 Pts): Archery, Fencing, Badminton, Table Tennis, Skateboarding
 

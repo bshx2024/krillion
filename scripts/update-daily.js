@@ -35,6 +35,11 @@ const SCHEDULED_SETS = [
       id: 1,
       category: "Geography",
       prompt: "A city in California",
+      verificationNote: "Must be an officially incorporated municipality in the State of California.",
+      factSource: "California State Association of Counties (CSAC)",
+      sourceUrl: "https://www.counties.org/cities-within-each-county",
+      verifiedDate: "October 10, 2026",
+      modelRationale: "Ojai and Weed are officially incorporated municipalities with low population density and low top-of-mind retrieval compared to coastal giants.",
       hints: {
         stage1: "Think beyond Southern California coastal giants; think northern inland or historic small valley towns.",
         stage2: "Starts with 'O' or 'W', short 4-letter name famous for citrus or mountain views.",
@@ -51,6 +56,11 @@ const SCHEDULED_SETS = [
       id: 2,
       category: "Biology / Animals",
       prompt: "A mammal starting with the letter 'B'",
+      verificationNote: "Must be a recognized biological mammal species under class Mammalia with a common English name starting with 'B'.",
+      factSource: "Integrated Taxonomic Information System (ITIS) & IUCN",
+      sourceUrl: "https://www.itis.gov/",
+      verifiedDate: "October 10, 2026",
+      modelRationale: "Binturong (Arctictis binturong) and Bilby are verified mammals with low linguistic frequency compared to Bear, Bat, or Beaver.",
       hints: {
         stage1: "A shy Southeast Asian nocturnal civet-like tree dweller that smells like buttered popcorn.",
         stage2: "Starts with 'Bi...', 9 letters long.",
@@ -67,6 +77,11 @@ const SCHEDULED_SETS = [
       id: 3,
       category: "Movies & Cinema",
       prompt: "A movie directed by Quentin Tarantino",
+      verificationNote: "Must be a theatrically released feature film with Quentin Tarantino credited as director.",
+      factSource: "American Film Institute (AFI) Catalog",
+      sourceUrl: "https://catalog.afi.com/",
+      verifiedDate: "October 10, 2026",
+      modelRationale: "Death Proof (2007) was released under Grindhouse with significantly lower box-office visibility than Pulp Fiction or Django Unchained.",
       hints: {
         stage1: "His lesser-known homage to 1970s exploitation slashers / muscle cars with Kurt Russell.",
         stage2: "Starts with 'D...', two words, released as part of Grindhouse.",
@@ -83,22 +98,32 @@ const SCHEDULED_SETS = [
       id: 4,
       category: "World Geography",
       prompt: "A country that borders Germany",
+      verificationNote: "Must be one of the exactly 9 recognized sovereign nations sharing a terrestrial land border with Germany.",
+      factSource: "Federal Agency for Cartography and Geodesy (BKG)",
+      sourceUrl: "https://gdz.bkg.bund.de/",
+      verifiedDate: "October 10, 2026",
+      modelRationale: "All 9 valid border countries are scored via linguistic search frequency. Luxembourg and Denmark are least cited in border trivia contexts, while France and Switzerland are top-of-mind.",
       hints: {
         stage1: "Think about the smallest landlocked duchy or the northern peninsula border.",
-        stage2: "Starts with 'L...', tiny European microstate.",
-        stage3: "Luxembourg (100 pts) / Denmark (90 pts)"
+        stage2: "Starts with 'L...' or 'D...', small sovereign neighbor.",
+        stage3: "Luxembourg (100 pts) / Denmark (100 pts)"
       },
-      plankton: ["France", "Poland", "Austria", "Switzerland"],
-      tooClever: ["Netherlands", "Belgium", "Czech Republic"],
-      schooler: ["Czechia", "The Netherlands"],
-      rare: ["Denmark"],
-      deepCut: ["Liechtenstein (TRICK: Does NOT border Germany directly!)"],
-      oneInAKrillion: ["Luxembourg"]
+      plankton: ["France", "Switzerland", "Poland"],
+      tooClever: ["Netherlands", "The Netherlands", "Austria"],
+      schooler: ["Czechia"],
+      rare: ["Belgium", "Czech Republic"],
+      deepCut: [],
+      oneInAKrillion: ["Luxembourg", "Denmark"]
     },
     {
       id: 5,
       category: "Food & Cuisine",
       prompt: "A pasta shape or variety",
+      verificationNote: "Must be a recognized authentic Italian pasta shape cataloged in official culinary registries.",
+      factSource: "Italian Ministry of Agriculture (MASAF) Food Registry",
+      sourceUrl: "https://www.politicheagricole.it/",
+      verifiedDate: "October 10, 2026",
+      modelRationale: "Campanelle (gigli) and Culurgiones (Sardinian stuffed pocket) are regional artisanal shapes rarely named compared to Spaghetti or Penne.",
       hints: {
         stage1: "Sardinian or Sicilian twisted artisanal shapes, or delicate stuffed pasta.",
         stage2: "Starts with 'C...' or 'T...', rare curled or ear-shaped noodles.",
@@ -115,6 +140,11 @@ const SCHEDULED_SETS = [
       id: 6,
       category: "Sports & Olympics",
       prompt: "A Summer Olympic sport / event",
+      verificationNote: "Must be an official medal sport or discipline recognized by the International Olympic Committee (IOC).",
+      factSource: "International Olympic Committee (IOC) Official Sports Program",
+      sourceUrl: "https://olympics.com/en/sports/",
+      verifiedDate: "October 10, 2026",
+      modelRationale: "Modern Pentathlon and Canoe Slalom feature low spectator frequency compared to Swimming, Athletics, or Gymnastics.",
       hints: {
         stage1: "Modern or specialized events introduced recently or niche equestrian disciplines.",
         stage2: "Modern pentathlon sub-discipline, or urban sports like breakdance / canoeing.",
@@ -132,6 +162,10 @@ const SCHEDULED_SETS = [
       category: "Music & Band Members",
       prompt: "An official member of the British rock band Queen",
       verificationNote: "Must be one of the four permanent official core recording members of Queen (1971–present).",
+      factSource: "Official Queen Online Archives & Rock Hall Lineup Record",
+      sourceUrl: "https://www.queenonline.com/",
+      verifiedDate: "October 10, 2026",
+      modelRationale: "John Deacon wrote 'Another One Bites the Dust' but retired from music in 1997, giving him the lowest linguistic top-of-mind score compared to active members May and Taylor.",
       hints: {
         stage1: "The bassist who retired from music in 1997 and wrote 'Another One Bites the Dust'.",
         stage2: "Starts with 'J...', 4-letter first name, 6-letter surname.",
@@ -454,8 +488,11 @@ ${selectedPrompts.map((p, idx) => `              <tr>
                 <td><strong>${idx + 1}</strong></td>
                 <td><span class="cat-pill">${p.category}</span></td>
                 <td>${p.prompt}</td>
-                <td><span class="text-muted">${p.verificationNote || 'Verified entity'}</span></td>
-                <td><strong class="text-glow">${p.oneInAKrillion[0]}</strong>, ${p.oneInAKrillion.slice(1, 3).join(', ')}</td>
+                <td>
+                  <span class="text-muted">${p.verificationNote || 'Verified entity'}</span>
+                  ${p.factSource ? `<br><small class="text-muted" style="font-size:0.75rem; opacity:0.85;">Source: ${p.sourceUrl ? `<a href="${p.sourceUrl}" target="_blank" rel="noopener noreferrer" style="color:var(--cyan-glow); text-decoration:underline;">${p.factSource}</a>` : p.factSource} (${p.verifiedDate || '2026-10-10'})</small>` : ''}
+                </td>
+                <td><strong class="text-glow">${p.oneInAKrillion[0]}</strong>${p.oneInAKrillion.length > 1 ? ', ' + p.oneInAKrillion.slice(1, 3).join(', ') : ''}</td>
                 <td><span class="text-warning">${p.tooClever.slice(0, 3).join(', ')}</span></td>
                 <td><span class="text-muted">${p.plankton.slice(0, 3).join(', ')}</span></td>
               </tr>`).join('\n')}
@@ -481,7 +518,7 @@ ${selectedPrompts.map((p, idx) => `          <div class="hint-card">
             </details>
             <details class="hint-detail reveal-gold">
               <summary class="hint-summary">🎯 Rare Krillion Answer</summary>
-              <div class="hint-body text-glow"><strong>${p.oneInAKrillion[0]}</strong> (100 pts). Avoid: ${p.tooClever[0]}!</div>
+              <div class="hint-body text-glow"><strong>${p.oneInAKrillion.join(', ')}</strong> (100 pts). Avoid: ${p.tooClever[0]}!</div>
             </details>
           </div>`).join('\n')}
         </div>

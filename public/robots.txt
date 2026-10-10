@@ -27,4 +27,5 @@ User-agent: Bytespider
 Allow: /
 
 Sitemap: https://www.krillion.click/sitemap.xml
-Sitemap: https://www.krillion.click/llms.txt
+# Machine-readable AI Knowledge Base: https://www.krillion.click/llms.txt
+# Today's daily answers digest: https://www.krillion.click/today.txt
