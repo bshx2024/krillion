@@ -470,17 +470,17 @@ ${selectedPrompts.map((p, idx) => `          <div class="hint-card">
               <span class="hint-number">Prompt #${idx + 1}</span>
               <span class="cat-pill">${p.category}</span>
             </div>
-            <h4 class="hint-prompt-name">${p.prompt}</h4>
+            <h3 class="hint-prompt-name">${p.prompt}</h3>
             <details class="hint-detail">
-              <summary class="hint-summary">Stage 1: Directional Clue</summary>
+              <summary class="hint-summary">Clue 1: Topic & Concept</summary>
               <div class="hint-body">${p.hints.stage1}</div>
             </details>
             <details class="hint-detail">
-              <summary class="hint-summary">Stage 2: First Letter & Length</summary>
+              <summary class="hint-summary">Clue 2: Letters & Word Count</summary>
               <div class="hint-body">${p.hints.stage2}</div>
             </details>
             <details class="hint-detail reveal-gold">
-              <summary class="hint-summary">Stage 3: Full Reveal (Click to Unmask)</summary>
+              <summary class="hint-summary">Reveal: Top Answer & Collision Trap</summary>
               <div class="hint-body text-glow"><strong>${p.oneInAKrillion[0]}</strong> (100 pts). Avoid: ${p.tooClever[0]}!</div>
             </details>
           </div>`).join('\n')}
