@@ -5,10 +5,10 @@
   "scripts": {
     "dev": "vite",
     "validate": "node scripts/sync-and-validate.js",
-    "build": "node scripts/sync-and-validate.js && vite build",
+    "build": "node scripts/sync-and-validate.js && node scripts/test-gameplay-e2e.js && vite build",
     "preview": "vite preview",
     "update-daily": "node scripts/update-daily.js && node scripts/sync-and-validate.js",
-    "test": "node scripts/sync-and-validate.js"
+    "test": "node scripts/sync-and-validate.js && node scripts/test-gameplay-e2e.js"
   },
   "keywords": [],
   "author": "",
