@@ -8,13 +8,13 @@ Evaluation Note: Rarity tiers represent an open heuristic prediction model (ling
 - Avoid Too Clever Trap (Predicted 15 Pts): Sacramento, Oakland, Pasadena, Berkeley, Fresno
 
 2. Prompt: A mammal starting with the letter 'B'
-- Rule: Must be a recognized biological mammal species under class Mammalia with a common English name starting with 'B'.
-- Top Rare Answers (Predicted 100 Pts): Binturong, Bilby, Bassariscus, Beira, Bison antiquus
+- Rule: Must be a recognized living mammal species under class Mammalia with an established common English name starting with 'B'.
+- Top Rare Answers (Predicted 100 Pts): Binturong, Bilby, Babirusa, Bettong, Bharal
 - Avoid Too Clever Trap (Predicted 15 Pts): Baboon, Buffalo, Bonobo, Blue Whale
 
 3. Prompt: A movie directed by Quentin Tarantino
-- Rule: Must be a theatrically released feature film with Quentin Tarantino credited as director.
-- Top Rare Answers (Predicted 100 Pts): Death Proof, My Best Friend's Birthday
+- Rule: Must be an officially theatrically released feature film credited with Quentin Tarantino as director.
+- Top Rare Answers (Predicted 100 Pts): Death Proof
 - Avoid Too Clever Trap (Predicted 15 Pts): Reservoir Dogs, Once Upon a Time in Hollywood, The Hateful Eight
 
 4. Prompt: A country that borders Germany
@@ -27,9 +27,9 @@ Evaluation Note: Rarity tiers represent an open heuristic prediction model (ling
 - Top Rare Answers (Predicted 100 Pts): Campanelle, Culurgiones, Busiate, Trofie, Casoncelli
 - Avoid Too Clever Trap (Predicted 15 Pts): Ravioli, Gnocchi, Orzo, Farfalle, Rigatoni
 
-6. Prompt: A Summer Olympic sport / event
-- Rule: Must be an official medal sport or discipline recognized by the International Olympic Committee (IOC).
-- Top Rare Answers (Predicted 100 Pts): Modern Pentathlon, Canoe Slalom, Keirin, Omnium, Skeet Shooting
+6. Prompt: A Summer Olympic sport or discipline
+- Rule: Must be an official sport or discipline recognized by the International Olympic Committee (IOC) on the Summer Olympic Programme.
+- Top Rare Answers (Predicted 100 Pts): Modern Pentathlon, Canoe Slalom
 - Avoid Too Clever Trap (Predicted 15 Pts): Archery, Fencing, Badminton, Table Tennis, Skateboarding
 
 7. Prompt: An official member of the British rock band Queen

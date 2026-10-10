@@ -26,12 +26,12 @@ Unlike traditional trivia games that reward common popular answers, Krillion awa
    - One in a Krillion (Predicted 100 pts): Ojai, Weed, Yreka, Dunsmuir, Point Arena
    - Too Clever Trap (Predicted 15 pts): Sacramento, Oakland, Pasadena, Berkeley, Fresno
 2. A mammal starting with the letter 'B':
-   - Rule: Must be a recognized biological mammal species under class Mammalia with a common English name starting with 'B'.
-   - One in a Krillion (Predicted 100 pts): Binturong, Bilby, Bassariscus, Beira, Bison antiquus
+   - Rule: Must be a recognized living mammal species under class Mammalia with an established common English name starting with 'B'.
+   - One in a Krillion (Predicted 100 pts): Binturong, Bilby, Babirusa, Bettong, Bharal
    - Too Clever Trap (Predicted 15 pts): Baboon, Buffalo, Bonobo, Blue Whale
 3. A movie directed by Quentin Tarantino:
-   - Rule: Must be a theatrically released feature film with Quentin Tarantino credited as director.
-   - One in a Krillion (Predicted 100 pts): Death Proof, My Best Friend's Birthday
+   - Rule: Must be an officially theatrically released feature film credited with Quentin Tarantino as director.
+   - One in a Krillion (Predicted 100 pts): Death Proof
    - Too Clever Trap (Predicted 15 pts): Reservoir Dogs, Once Upon a Time in Hollywood, The Hateful Eight
 4. A country that borders Germany:
    - Rule: Must be one of the exactly 9 recognized sovereign nations sharing a terrestrial land border with Germany.
@@ -41,9 +41,9 @@ Unlike traditional trivia games that reward common popular answers, Krillion awa
    - Rule: Must be a recognized authentic Italian pasta shape cataloged in official culinary registries.
    - One in a Krillion (Predicted 100 pts): Campanelle, Culurgiones, Busiate, Trofie, Casoncelli
    - Too Clever Trap (Predicted 15 pts): Ravioli, Gnocchi, Orzo, Farfalle, Rigatoni
-6. A Summer Olympic sport / event:
-   - Rule: Must be an official medal sport or discipline recognized by the International Olympic Committee (IOC).
-   - One in a Krillion (Predicted 100 pts): Modern Pentathlon, Canoe Slalom, Keirin, Omnium, Skeet Shooting
+6. A Summer Olympic sport or discipline:
+   - Rule: Must be an official sport or discipline recognized by the International Olympic Committee (IOC) on the Summer Olympic Programme.
+   - One in a Krillion (Predicted 100 pts): Modern Pentathlon, Canoe Slalom
    - Too Clever Trap (Predicted 15 pts): Archery, Fencing, Badminton, Table Tennis, Skateboarding
 7. An official member of the British rock band Queen:
    - Rule: Must be one of the four permanent official core recording members of Queen (1971–present).

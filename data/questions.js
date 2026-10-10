@@ -64,15 +64,15 @@ export const DAILY_GAME_DATA = {
         "id": 2,
         "category": "Biology / Animals",
         "prompt": "A mammal starting with the letter 'B'",
-        "verificationNote": "Must be a recognized biological mammal species under class Mammalia with a common English name starting with 'B'.",
-        "factSource": "Integrated Taxonomic Information System (ITIS) & IUCN",
+        "verificationNote": "Must be a recognized living mammal species under class Mammalia with an established common English name starting with 'B'.",
+        "factSource": "Integrated Taxonomic Information System (ITIS) & IUCN Red List",
         "sourceUrl": "https://www.itis.gov/",
         "verifiedDate": "October 10, 2026",
-        "modelRationale": "Binturong (Arctictis binturong) and Bilby are verified mammals with low linguistic frequency compared to Bear, Bat, or Beaver.",
+        "modelRationale": "Binturong (Arctictis binturong), Bilby, and Babirusa are verified mammal species with established English names exhibiting low conversational recall compared to Bear or Bat.",
         "hints": {
-            "stage1": "A shy Southeast Asian nocturnal civet-like tree dweller that smells like buttered popcorn.",
-            "stage2": "Starts with 'Bi...', 9 letters long.",
-            "stage3": "Binturong (100 pts) / Bilby (95 pts)"
+            "stage1": "Think of shy nocturnal forest dwellers or unique Australasian / Southeast Asian marsupials and ungulates.",
+            "stage2": "Established common English names starting with 'Bi...' or 'Ba...' (e.g. nocturnal civet relative, marsupial, or wild swine).",
+            "stage3": "Binturong, Bilby, Babirusa (100 pts). Avoid: Baboon!"
         },
         "plankton": [
             "Bear",
@@ -99,36 +99,36 @@ export const DAILY_GAME_DATA = {
             "Bushbaby"
         ],
         "deepCut": [
-            "Bharal",
-            "Babirusa",
             "Baiji",
-            "Bettong"
+            "Bettong",
+            "Bharal",
+            "Beira"
         ],
         "oneInAKrillion": [
             "Binturong",
             "Bilby",
-            "Bassariscus",
-            "Beira",
-            "Bison antiquus"
+            "Babirusa",
+            "Bettong",
+            "Bharal"
         ]
     },
     {
         "id": 3,
         "category": "Movies & Cinema",
         "prompt": "A movie directed by Quentin Tarantino",
-        "verificationNote": "Must be a theatrically released feature film with Quentin Tarantino credited as director.",
-        "factSource": "American Film Institute (AFI) Catalog",
+        "verificationNote": "Must be an officially theatrically released feature film credited with Quentin Tarantino as director.",
+        "factSource": "American Film Institute (AFI) Catalog & Directors Guild of America",
         "sourceUrl": "https://catalog.afi.com/",
         "verifiedDate": "October 10, 2026",
-        "modelRationale": "Death Proof (2007) was released under Grindhouse with significantly lower box-office visibility than Pulp Fiction or Django Unchained.",
+        "modelRationale": "Death Proof (2007) holds the lowest worldwide box-office return of Tarantino's credited theatrical feature films, ranking highest in obscurity.",
         "hints": {
-            "stage1": "His lesser-known homage to 1970s exploitation slashers / muscle cars with Kurt Russell.",
-            "stage2": "Starts with 'D...', two words, released as part of Grindhouse.",
-            "stage3": "Death Proof (100 pts)"
+            "stage1": "His 1970s exploitation slasher / muscle-car homage starring Kurt Russell, released theatrically in 2007.",
+            "stage2": "Starts with 'D...', two words (5 letters and 5 letters).",
+            "stage3": "Death Proof (100 pts). Avoid: Reservoir Dogs!"
         },
         "plankton": [
             "Pulp Fiction",
-            "Kill Bill",
+            "Kill Bill: Volume 1",
             "Django Unchained",
             "Inglourious Basterds"
         ],
@@ -139,19 +139,16 @@ export const DAILY_GAME_DATA = {
         ],
         "schooler": [
             "Jackie Brown",
-            "Kill Bill Vol 2"
+            "Kill Bill: Volume 2"
         ],
         "rare": [
-            "Grindhouse",
             "Four Rooms"
         ],
         "deepCut": [
-            "Sin City (Guest Director)",
-            "Natural Born Killers (Story)"
+            "Grindhouse"
         ],
         "oneInAKrillion": [
-            "Death Proof",
-            "My Best Friend's Birthday"
+            "Death Proof"
         ]
     },
     {
@@ -248,22 +245,23 @@ export const DAILY_GAME_DATA = {
     {
         "id": 6,
         "category": "Sports & Olympics",
-        "prompt": "A Summer Olympic sport / event",
-        "verificationNote": "Must be an official medal sport or discipline recognized by the International Olympic Committee (IOC).",
+        "prompt": "A Summer Olympic sport or discipline",
+        "verificationNote": "Must be an official sport or discipline recognized by the International Olympic Committee (IOC) on the Summer Olympic Programme.",
         "factSource": "International Olympic Committee (IOC) Official Sports Program",
         "sourceUrl": "https://olympics.com/en/sports/",
         "verifiedDate": "October 10, 2026",
-        "modelRationale": "Modern Pentathlon and Canoe Slalom feature low spectator frequency compared to Swimming, Athletics, or Gymnastics.",
+        "modelRationale": "Modern Pentathlon and Canoe Slalom feature the lowest global broadcast viewership and participant bases among official Summer Olympic disciplines.",
         "hints": {
-            "stage1": "Modern or specialized events introduced recently or niche equestrian disciplines.",
-            "stage2": "Modern pentathlon sub-discipline, or urban sports like breakdance / canoeing.",
-            "stage3": "Modern Pentathlon (100 pts) / Canoe Slalom (95 pts)"
+            "stage1": "A traditional multi-sport combining five diverse disciplines, or whitewater rapid navigation.",
+            "stage2": "Starts with 'M...' (multi-discipline) or 'C...' (whitewater rapid navigation).",
+            "stage3": "Modern Pentathlon, Canoe Slalom (100 pts). Avoid: Archery!"
         },
         "plankton": [
             "Swimming",
             "Athletics",
             "Gymnastics",
             "Basketball",
+            "Football",
             "Soccer"
         ],
         "tooClever": [
@@ -284,20 +282,18 @@ export const DAILY_GAME_DATA = {
             "Water Polo",
             "Field Hockey",
             "Handball",
-            "Sport Climbing"
+            "Sport Climbing",
+            "Surfing"
         ],
         "deepCut": [
-            "Equestrian Dressage",
+            "Trampoline Gymnastics",
+            "Rugby Sevens",
             "Artistic Swimming",
-            "Surfing",
-            "Trampoline"
+            "Equestrian Dressage"
         ],
         "oneInAKrillion": [
             "Modern Pentathlon",
-            "Canoe Slalom",
-            "Keirin",
-            "Omnium",
-            "Skeet Shooting"
+            "Canoe Slalom"
         ]
     },
     {

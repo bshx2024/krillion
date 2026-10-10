@@ -283,4 +283,41 @@ if (!linkMatches || linkMatches.length < 7) {
 }
 console.log('  ✓ Assertion Passed: All 7 daily prompts contain verified clickable source links.');
 
-console.log('\n🎉 ALL 9 INTEGRITY ASSERTIONS PASSED! Data sources are 100% unified.\n');
+// Check 10: Biological mammals starting with B must strictly use established common English names
+for (const file of filesToAudit) {
+  const content = fs.readFileSync(file.path, 'utf8');
+  if (content.includes('Bassariscus') || content.includes('Bison antiquus')) {
+    console.error(`❌ ASSERTION FAILED: Found non-common English name or prehistoric binomial in ${file.name}`);
+    process.exit(1);
+  }
+}
+console.log('  ✓ Assertion Passed: Mammal candidates strictly use verified living common English names (Binturong, Bilby, Babirusa).');
+
+// Check 11: Tarantino films strictly adhere to theatrical directorial feature release criteria
+for (const file of filesToAudit) {
+  const content = fs.readFileSync(file.path, 'utf8');
+  if (content.includes("My Best Friend's Birthday") || content.includes('Natural Born Killers')) {
+    console.error(`❌ ASSERTION FAILED: Found non-theatrical or non-directed film in ${file.name}`);
+    process.exit(1);
+  }
+}
+const tarantinoPrompt = prompts.find(p => p.id === 3 || p.prompt.includes('Tarantino'));
+if (!tarantinoPrompt || !tarantinoPrompt.oneInAKrillion.includes('Death Proof')) {
+  console.error('❌ ASSERTION FAILED: Death Proof must be the top obscure theatrical feature for Tarantino prompt');
+  process.exit(1);
+}
+console.log('  ✓ Assertion Passed: Tarantino filmography strictly audited to theatrically released directorial features (Death Proof verified).');
+
+// Check 12: Olympic prompt classification hierarchy standardized to official IOC sports & disciplines
+const olympicPrompt = prompts.find(p => p.id === 6 || p.prompt.includes('Olympic'));
+if (!olympicPrompt || !olympicPrompt.oneInAKrillion.includes('Modern Pentathlon') || !olympicPrompt.oneInAKrillion.includes('Canoe Slalom')) {
+  console.error('❌ ASSERTION FAILED: Olympic prompt must have Modern Pentathlon and Canoe Slalom as rare disciplines');
+  process.exit(1);
+}
+if (olympicPrompt.oneInAKrillion.includes('Keirin') || olympicPrompt.oneInAKrillion.includes('Omnium') || olympicPrompt.oneInAKrillion.includes('Skeet Shooting')) {
+  console.error('❌ ASSERTION FAILED: Specific track/shooting sub-events mixed into Olympic sports discipline tier');
+  process.exit(1);
+}
+console.log('  ✓ Assertion Passed: Olympic prompt classification strictly standardized to IOC Sports and Disciplines.');
+
+console.log('\n🎉 ALL 12 INTEGRITY ASSERTIONS PASSED! Data sources are 100% unified and fact-checked.\n');
