@@ -303,7 +303,7 @@
           </div>
 
           <!-- Game Summary Modal (Dynamically Populated on Completion) -->
-          <div class="game-summary-modal" id="game-summary-modal" style="display: none;" aria-hidden="true">
+          <div class="game-summary-modal" id="game-summary-modal" style="display: none;" aria-hidden="true" hidden>
             <div class="summary-card">
               <div class="summary-celebration-icon" id="summary-icon">🏆</div>
               <h3 class="summary-title" id="summary-title"></h3>
@@ -509,11 +509,11 @@
             <h3 class="hint-prompt-name">A city in California</h3>
             <details class="hint-detail">
               <summary class="hint-summary">💡 Krillion Direction Clue</summary>
-              <div class="hint-body">Think beyond coastal metropolitan giants; think of smaller incorporated California cities, including historic inland towns and mountain communities.</div>
+              <div class="hint-body">Think beyond coastal metropolitan giants; explore smaller incorporated California cities across historic inland valleys, mountain passes, and scenic coastal enclaves.</div>
             </details>
             <details class="hint-detail">
               <summary class="hint-summary">🔤 Letter Count Clue</summary>
-              <div class="hint-body">Focus on historic valley, agricultural, or mountain municipalities (such as Ventura County citrus valleys or Siskiyou County).</div>
+              <div class="hint-body">Differentiated candidate clues: 4-letter valley citrus town (O...) or timber town near Mt. Shasta (W...); 5-letter Siskiyou gold-rush county seat (Y...); 8-letter river railway town (D...); or 10-letter Mendocino coastal port (P... A...).</div>
             </details>
             <details class="hint-detail reveal-gold">
               <summary class="hint-summary">🎯 Rare Krillion Answer</summary>
@@ -528,11 +528,11 @@
             <h3 class="hint-prompt-name">A mammal starting with the letter 'B'</h3>
             <details class="hint-detail">
               <summary class="hint-summary">💡 Krillion Direction Clue</summary>
-              <div class="hint-body">Think of shy nocturnal forest dwellers or unique Australasian / Southeast Asian marsupials and ungulates.</div>
+              <div class="hint-body">Think of shy nocturnal forest dwellers, Australasian desert marsupials, or unique Asian ungulates and suids with verified common English names.</div>
             </details>
             <details class="hint-detail">
               <summary class="hint-summary">🔤 Letter Count Clue</summary>
-              <div class="hint-body">Established common English names starting with 'Bi...' or 'Ba...' (e.g. nocturnal civet relative, marsupial, or wild swine).</div>
+              <div class="hint-body">Differentiated species clues: 9-letter Southeast Asian arboreal binturong; 5-letter Australian desert bilby; 8-letter Indonesian wild babirusa; 7-letter bettong (rat-kangaroo); or 6-letter Himalayan bharal (blue sheep).</div>
             </details>
             <details class="hint-detail reveal-gold">
               <summary class="hint-summary">🎯 Rare Krillion Answer</summary>
@@ -547,11 +547,11 @@
             <h3 class="hint-prompt-name">A movie directed by Quentin Tarantino</h3>
             <details class="hint-detail">
               <summary class="hint-summary">💡 Krillion Direction Clue</summary>
-              <div class="hint-body">His 1970s exploitation slasher / muscle-car homage starring Kurt Russell, released theatrically in 2007.</div>
+              <div class="hint-body">His 1970s exploitation slasher and muscle-car homage starring Kurt Russell, officially released theatrically as a feature film in 2007.</div>
             </details>
             <details class="hint-detail">
               <summary class="hint-summary">🔤 Letter Count Clue</summary>
-              <div class="hint-body">Starts with 'D...', two words (5 letters and 5 letters).</div>
+              <div class="hint-body">Two words (5 letters and 5 letters) starting with 'D...' (D-e-a-t-h P-r-o-o-f), released theatrically as part of Grindhouse.</div>
             </details>
             <details class="hint-detail reveal-gold">
               <summary class="hint-summary">🎯 Rare Krillion Answer</summary>
@@ -566,11 +566,11 @@
             <h3 class="hint-prompt-name">A country that borders Germany</h3>
             <details class="hint-detail">
               <summary class="hint-summary">💡 Krillion Direction Clue</summary>
-              <div class="hint-body">Think about the smallest landlocked duchy or the northern peninsula border.</div>
+              <div class="hint-body">Look at Germany's northern maritime jutland boundary or western low-countries border, strictly among the 9 sovereign land neighbors.</div>
             </details>
             <details class="hint-detail">
               <summary class="hint-summary">🔤 Letter Count Clue</summary>
-              <div class="hint-body">Starts with 'L...' or 'D...', small sovereign neighbor.</div>
+              <div class="hint-body">Differentiated border clues: Either Germany's single-border northern Scandinavian neighbor (7 letters, D...) or the historic multilingual Grand Duchy to the west (10 letters, L...).</div>
             </details>
             <details class="hint-detail reveal-gold">
               <summary class="hint-summary">🎯 Rare Krillion Answer</summary>
@@ -604,11 +604,11 @@
             <h3 class="hint-prompt-name">A Summer Olympic sport or discipline</h3>
             <details class="hint-detail">
               <summary class="hint-summary">💡 Krillion Direction Clue</summary>
-              <div class="hint-body">A traditional multi-sport combining five diverse disciplines, or whitewater rapid navigation.</div>
+              <div class="hint-body">An official medal sport or discipline on the IOC Summer Olympic Programme with low broadcast viewership compared to Athletics or Swimming.</div>
             </details>
             <details class="hint-detail">
               <summary class="hint-summary">🔤 Letter Count Clue</summary>
-              <div class="hint-body">Starts with 'M...' (multi-discipline) or 'C...' (whitewater rapid navigation).</div>
+              <div class="hint-body">Specific discipline clues: A multi-sport combining fencing, swimming, equestrian, laser-run (16 letters, M... P...); or navigating whitewater slalom gates in a kayak/canoe (11 letters, C... S...).</div>
             </details>
             <details class="hint-detail reveal-gold">
               <summary class="hint-summary">🎯 Rare Krillion Answer</summary>
@@ -752,11 +752,130 @@
           </div>
         </div>
 
+        <!-- Ocean Depth & Scoring Conversion Matrix -->
+        <div class="card glass-card" style="margin-bottom: 2.5rem;" id="depth-conversion-matrix">
+          <div class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
+            <span class="section-tag" style="background: rgba(0, 240, 255, 0.15); color: var(--cyan-glow);">MATHEMATICAL FORMULA & BOUNDS</span>
+            <h3 style="font-size: 1.5rem; margin-top: 0.5rem; color: #fff;">Ocean Depth & Rarity Points Conversion Guide</h3>
+            <p class="text-muted" style="font-size: 0.95rem;">
+              Clear conversion rules: How obscurity score points translate into submarine dive meters in the Mariana Trench.
+            </p>
+          </div>
+
+          <!-- Formula Callout -->
+          <div style="background: rgba(0, 0, 0, 0.4); border-left: 4px solid var(--cyan-glow); padding: 1.25rem; border-radius: 8px; margin-bottom: 1.5rem;">
+            <h4 style="margin: 0 0 0.5rem 0; color: var(--cyan-glow); font-size: 1.1rem;">🧮 Core Depth Conversion Formula:</h4>
+            <p style="margin: 0; font-size: 1.05rem; font-family: monospace; color: #fff;">
+              <strong>Depth Gained per Prompt (Meters) = Rarity Score Points × 10</strong>
+            </p>
+            <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: var(--text-muted);">
+              Every 1 rarity obscurity point propels your submarine 10 meters deeper into the oceanic abyss.
+            </p>
+          </div>
+
+          <!-- Tier Breakdown Table -->
+          <div class="table-responsive-wrapper">
+            <table class="krillion-direct-table">
+              <thead>
+                <tr>
+                  <th>Obscurity Tier</th>
+                  <th>Points per Prompt</th>
+                  <th>Depth Gained (Meters)</th>
+                  <th>Outcome & Handling</th>
+                  <th>Prompt 1 Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong class="text-glow">👑 One in a Krillion</strong></td>
+                  <td><strong>100 Pts</strong></td>
+                  <td><span class="text-glow">+1,000m</span></td>
+                  <td>Maximum obscurity; deep-catalog factual answer</td>
+                  <td><em>Ojai, Weed, Yreka</em></td>
+                </tr>
+                <tr>
+                  <td><strong style="color: #9d4edd;">💎 Deep Cut</strong></td>
+                  <td><strong>64 – 85 Pts</strong></td>
+                  <td><span>+640m – +850m</span></td>
+                  <td>High-tier obscure knowledge</td>
+                  <td><em>Ukiah, Fort Bragg</em></td>
+                </tr>
+                <tr>
+                  <td><strong style="color: #4cc9f0;">🧭 Rare</strong></td>
+                  <td><strong>32 – 60 Pts</strong></td>
+                  <td><span>+320m – +600m</span></td>
+                  <td>Low colloquial conversational frequency</td>
+                  <td><em>Eureka, Solvang</em></td>
+                </tr>
+                <tr>
+                  <td><strong style="color: #4895ef;">🏫 Schooler</strong></td>
+                  <td><strong>16 – 30 Pts</strong></td>
+                  <td><span>+160m – +300m</span></td>
+                  <td>Mid-tier general knowledge</td>
+                  <td><em>Bakersfield, Santa Barbara</em></td>
+                </tr>
+                <tr>
+                  <td><strong class="text-warning">🪤 Too Clever Trap</strong></td>
+                  <td><strong>8 – 15 Pts</strong></td>
+                  <td><span class="text-warning">+80m – +150m</span></td>
+                  <td>Overthought candidate where players collide</td>
+                  <td><em>Sacramento, Berkeley</em></td>
+                </tr>
+                <tr>
+                  <td><strong class="text-muted">🦐 Plankton (Common)</strong></td>
+                  <td><strong>4 – 10 Pts</strong></td>
+                  <td><span class="text-muted">+40m – +100m</span></td>
+                  <td>Top-of-mind obvious answer (minimum valid score)</td>
+                  <td><em>Los Angeles, San Francisco</em></td>
+                </tr>
+                <tr style="background: rgba(239, 68, 68, 0.08);">
+                  <td><strong style="color: #ef4444;">❌ Invalid / Off-Topic</strong></td>
+                  <td><strong>0 Pts</strong></td>
+                  <td><span style="color: #ef4444;">+0 Meters</span></td>
+                  <td>Fails factual rule validation or geographic boundary</td>
+                  <td><em>New York, Narnia</em></td>
+                </tr>
+                <tr style="background: rgba(239, 68, 68, 0.08);">
+                  <td><strong style="color: #ef4444;">⏰ 25s Timeout</strong></td>
+                  <td><strong>0 Pts</strong></td>
+                  <td><span style="color: #ef4444;">+0 Meters</span></td>
+                  <td>Time expires without submitting a qualifying answer</td>
+                  <td><em>(No response)</em></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Total Depth & Maximum Condition -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1rem;">
+              <h4 style="margin: 0 0 0.5rem 0; color: #fff; font-size: 0.95rem;">🎯 Session Total Depth Formula:</h4>
+              <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">
+                <strong>Total Depth = Sum of Depths Across Prompts 1 through 7</strong><br>
+                Your final score represents your cumulative trench descent, with a mathematical maximum ceiling of <strong>7,000 meters</strong>.
+              </p>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 1rem;">
+              <h4 style="margin: 0 0 0.5rem 0; color: var(--gold-glow); font-size: 0.95rem;">👑 7,000m Max Condition:</h4>
+              <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">
+                Achieved <em>only</em> by entering a valid <strong>One in a Krillion (100 Pts / 1,000m)</strong> answer on all 7 consecutive prompts (7 × 1,000m = 7,000m), conquering the Hadal Trench floor.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div class="section-header" style="margin-top: 3rem;">
           <h2 class="section-title">Krillion Frequently Asked Questions</h2>
         </div>
 
         <div class="faq-accordion">
+          <details class="faq-item">
+            <summary class="faq-question">How does the 7,000-meter maximum depth calculation work?</summary>
+            <div class="faq-answer">
+              <p>Each daily dive consists of 7 prompts. Every prompt awards up to 100 obscurity points based on our heuristic rarity model. The depth conversion ratio is exactly <strong>1 Point = 10 Meters</strong>. Thus, a maximum score of 100 points grants +1,000 meters of dive depth. Reaching the ultimate 7,000-meter Hadal Trench floor requires finding a top 100-point "One in a Krillion" answer on all 7 daily prompts (7 × 1,000m = 7,000m). Incorrect answers or timeouts yield +0 meters.</p>
+            </div>
+          </details>
+
           <details class="faq-item">
             <summary class="faq-question">What is the Krillion game and how do you play?</summary>
             <div class="faq-answer">
@@ -843,7 +962,7 @@
           <option value="3">Prompt 3: A movie directed by Quentin Tarantino</option>
           <option value="4">Prompt 4: A country that borders Germany</option>
           <option value="5">Prompt 5: A pasta shape or variety</option>
-          <option value="6">Prompt 6: A Summer Olympic sport / event</option>
+          <option value="6">Prompt 6: A Summer Olympic sport or discipline</option>
           <option value="7">Prompt 7: An official member of Queen</option>
         </select>
 
@@ -855,7 +974,7 @@
         </select>
 
         <label for="feedback-answer-input" style="margin-top: 1rem; display:block;">Suggested Answer / Entity:</label>
-        <input type="text" id="feedback-answer-input" class="form-input" placeholder="e.g. Dunsmuir, Keirin, Denmark" required>
+        <input type="text" id="feedback-answer-input" class="form-input" placeholder="e.g. Dunsmuir, Canoe Slalom, Denmark" required>
 
         <label for="feedback-source-input" style="margin-top: 1rem; display:block;">Verification Source / Reference (Optional):</label>
         <textarea id="feedback-source-input" class="form-textarea" rows="3" placeholder="e.g. ISO 3166-1, IUCN Red List, Official Album Credits..."></textarea>

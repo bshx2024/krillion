@@ -8,6 +8,13 @@ Krillion is a web-based reverse-trivia daily challenge.
 Players receive 7 daily prompts with a 25-second countdown per prompt.
 Unlike traditional trivia games that reward common popular answers, Krillion awards depth points based on obscurity (up to 100 per prompt, 700 max, representing a descent to 7,000 meters in the ocean trench).
 
+### Mathematical Depth Conversion Formula:
+- **Depth Gained per Prompt (m) = Rarity Score Points × 10**
+- 100 Pts = +1,000 Meters (One in a Krillion)
+- 15 Pts = +150 Meters (Too Clever Trap)
+- 0 Pts = +0 Meters (Invalid answer or 25s timeout)
+- **Session Total Depth** = Sum of 7 Prompts (Max Bound: 7,000m reached only by achieving One in a Krillion on all 7 prompts).
+
 ### Two-Tier Evaluation Architecture:
 1. Tier 1 (Fact-Check Validity): Is the answer an objectively recognized entity meeting the prompt criteria? (e.g. For "Borders Germany", all 9 bordering countries are valid; Liechtenstein is invalid).
 2. Tier 2 (Predicted Rarity Index): Evaluated via heuristic rarity modeling (top-of-mind linguistic frequency vs. long-tail obscure cataloging). Note: Scores represent an algorithmic model, not proprietary real-time player telemetry.

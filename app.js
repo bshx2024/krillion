@@ -440,7 +440,11 @@ class KrillionGameController {
           } catch (err) {}
           feedbackModal.style.display = 'none';
           feedbackForm.reset();
-          alert('✅ Thank you! Your feedback has been recorded for expert review.');
+          const toast = document.createElement('div');
+          toast.className = 'toast-notification';
+          toast.textContent = '✅ Feedback recorded! Thank you for helping keep Krillion data fact-checked.';
+          document.body.appendChild(toast);
+          setTimeout(() => toast.remove(), 4000);
         });
       }
     }
@@ -466,6 +470,8 @@ class KrillionGameController {
     clearInterval(this.timerInterval);
     if (this.summaryModal) {
       this.summaryModal.style.display = 'none';
+      this.summaryModal.setAttribute('hidden', '');
+      this.summaryModal.setAttribute('aria-hidden', 'true');
     }
     this.currentIndex = 0;
     this.totalDepth = 0;
@@ -783,6 +789,8 @@ Test your obscurity: https://www.krillion.click`;
       hintsBtn.textContent = '🔒 Hide Progressive Hints';
     }
 
+    this.summaryModal.removeAttribute('hidden');
+    this.summaryModal.setAttribute('aria-hidden', 'false');
     this.summaryModal.style.display = 'flex';
   }
 }
@@ -806,7 +814,7 @@ function initCategoryTabs() {
       title: "Movies & Cinema High-Depth Candidates",
       items: [
         { prompt: "Christopher Nolan Films", answer: "Following (100m) - Note: Memento is a common Too Clever trap!" },
-        { prompt: "Quentin Tarantino Films", answer: "Death Proof (100m), My Best Friend's Birthday" },
+        { prompt: "Quentin Tarantino Films", answer: "Death Proof (100m) - Only theatrical feature release under Grindhouse (AFI Catalog verified)" },
         { prompt: "Best Picture Oscar Winners (Pre-1970)", answer: "The Broadway Melody (1929), Cavalcade (1933), Marty (1955)" },
         { prompt: "James Bond Villains", answer: "Aristotle Kristatos, Brad Whitaker, General Koskov" }
       ]
@@ -814,7 +822,7 @@ function initCategoryTabs() {
     sports: {
       title: "Sports & Olympics Deep Dive",
       items: [
-        { prompt: "Summer Olympic Disciplines", answer: "Modern Pentathlon (100m), Canoe Slalom, Keirin, Omnium" },
+        { prompt: "Summer Olympic Disciplines", answer: "Modern Pentathlon (100m), Canoe Slalom (100m) - Official IOC Summer Olympic disciplines" },
         { prompt: "NFL Teams (East Divisions)", answer: "Washington Commanders (100m), Buffalo Bills (80m)" },
         { prompt: "World Cup Winning Nations", answer: "Uruguay (100m) - Avoid Brazil, Argentina, France!" },
         { prompt: "Tennis Grand Slam Venues", answer: "Melbourne Park (Court 3), Roland Garros (Court Simonne-Mathieu)" }

@@ -43,7 +43,8 @@ const todayTxtPath = path.join(ROOT_DIR, 'public', 'today.txt');
 const todayTxtLines = [
   `Krillion Daily Dive - Answers & Hints for Today (${formattedHumanDate} - Game #${gameNumber})`,
   `Website: https://www.krillion.click/`,
-  `Evaluation Note: Rarity tiers represent an open heuristic prediction model (linguistic frequency vs. cataloging obscurity), not proprietary live telemetry.\n`
+  `Evaluation Note: Rarity tiers represent an open heuristic prediction model (linguistic frequency vs. cataloging obscurity), not proprietary live telemetry.`,
+  `Depth Conversion Formula: 1 Rarity Point = 10 Meters Depth (100 Pts = +1,000m). Total Session Depth = Sum of 7 Prompts (Maximum 7,000m Hadal Trench).\n`
 ];
 
 prompts.forEach((p, idx) => {
@@ -69,6 +70,13 @@ const llmsContent = `# Krillion Knowledge Base & Daily Answers (LLMs.txt)
 Krillion is a web-based reverse-trivia daily challenge.
 Players receive 7 daily prompts with a 25-second countdown per prompt.
 Unlike traditional trivia games that reward common popular answers, Krillion awards depth points based on obscurity (up to 100 per prompt, 700 max, representing a descent to 7,000 meters in the ocean trench).
+
+### Mathematical Depth Conversion Formula:
+- **Depth Gained per Prompt (m) = Rarity Score Points × 10**
+- 100 Pts = +1,000 Meters (One in a Krillion)
+- 15 Pts = +150 Meters (Too Clever Trap)
+- 0 Pts = +0 Meters (Invalid answer or 25s timeout)
+- **Session Total Depth** = Sum of 7 Prompts (Max Bound: 7,000m reached only by achieving One in a Krillion on all 7 prompts).
 
 ### Two-Tier Evaluation Architecture:
 1. Tier 1 (Fact-Check Validity): Is the answer an objectively recognized entity meeting the prompt criteria? (e.g. For "Borders Germany", all 9 bordering countries are valid; Liechtenstein is invalid).
@@ -198,7 +206,8 @@ const filesToAudit = [
   { name: 'index.html', path: indexPath },
   { name: 'today.txt', path: todayTxtPath },
   { name: 'llms.txt', path: llmsTxtPath },
-  { name: 'questions.js', path: questionsPath }
+  { name: 'questions.js', path: questionsPath },
+  { name: 'app.js', path: path.join(__dirname, '../app.js') }
 ];
 
 // Check 1: Queen prompt must contain John Deacon and NEVER Doug Bogie
@@ -318,6 +327,14 @@ if (olympicPrompt.oneInAKrillion.includes('Keirin') || olympicPrompt.oneInAKrill
   console.error('❌ ASSERTION FAILED: Specific track/shooting sub-events mixed into Olympic sports discipline tier');
   process.exit(1);
 }
-console.log('  ✓ Assertion Passed: Olympic prompt classification strictly standardized to IOC Sports and Disciplines.');
+// Check 13: Zero leftover non-discipline track cycling sub-events across all files
+for (const file of filesToAudit) {
+  const content = fs.readFileSync(file.path, 'utf8');
+  if (content.includes('Keirin') || content.includes('Omnium')) {
+    console.error(`❌ ASSERTION FAILED: Found track cycling sub-event Keirin/Omnium in ${file.name}`);
+    process.exit(1);
+  }
+}
+console.log('  ✓ Assertion Passed: ZERO instances of Keirin or Omnium across all audited files.');
 
-console.log('\n🎉 ALL 12 INTEGRITY ASSERTIONS PASSED! Data sources are 100% unified and fact-checked.\n');
+console.log('\n🎉 ALL 13 INTEGRITY ASSERTIONS PASSED! Data sources are 100% unified and fact-checked.\n');

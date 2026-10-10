@@ -15,9 +15,9 @@ export const DAILY_GAME_DATA = {
         "verifiedDate": "October 10, 2026",
         "modelRationale": "Ojai and Weed are officially incorporated municipalities with low population density and low top-of-mind retrieval compared to coastal giants.",
         "hints": {
-            "stage1": "Think beyond coastal metropolitan giants; think of smaller incorporated California cities, including historic inland towns and mountain communities.",
-            "stage2": "Focus on historic valley, agricultural, or mountain municipalities (such as Ventura County citrus valleys or Siskiyou County).",
-            "stage3": "Ojai, Weed, Yreka, Dunsmuir, Point Arena (100 pts). Avoid: Sacramento!"
+            "stage1": "Think beyond coastal metropolitan giants; explore smaller incorporated California cities across historic inland valleys, mountain passes, and scenic coastal enclaves.",
+            "stage2": "Differentiated candidate clues: 4-letter valley citrus town (O...) or timber town near Mt. Shasta (W...); 5-letter Siskiyou gold-rush county seat (Y...); 8-letter river railway town (D...); or 10-letter Mendocino coastal port (P... A...).",
+            "stage3": "Ojai, Weed, Yreka, Dunsmuir, Point Arena (100 pts). Avoid: Sacramento, Oakland!"
         },
         "plankton": [
             "Los Angeles",
@@ -70,9 +70,9 @@ export const DAILY_GAME_DATA = {
         "verifiedDate": "October 10, 2026",
         "modelRationale": "Binturong (Arctictis binturong), Bilby, and Babirusa are verified mammal species with established English names exhibiting low conversational recall compared to Bear or Bat.",
         "hints": {
-            "stage1": "Think of shy nocturnal forest dwellers or unique Australasian / Southeast Asian marsupials and ungulates.",
-            "stage2": "Established common English names starting with 'Bi...' or 'Ba...' (e.g. nocturnal civet relative, marsupial, or wild swine).",
-            "stage3": "Binturong, Bilby, Babirusa (100 pts). Avoid: Baboon!"
+            "stage1": "Think of shy nocturnal forest dwellers, Australasian desert marsupials, or unique Asian ungulates and suids with verified common English names.",
+            "stage2": "Differentiated species clues: 9-letter Southeast Asian arboreal binturong; 5-letter Australian desert bilby; 8-letter Indonesian wild babirusa; 7-letter bettong (rat-kangaroo); or 6-letter Himalayan bharal (blue sheep).",
+            "stage3": "Binturong, Bilby, Babirusa, Bettong, Bharal (100 pts). Avoid: Baboon, Buffalo!"
         },
         "plankton": [
             "Bear",
@@ -122,9 +122,9 @@ export const DAILY_GAME_DATA = {
         "verifiedDate": "October 10, 2026",
         "modelRationale": "Death Proof (2007) holds the lowest worldwide box-office return of Tarantino's credited theatrical feature films, ranking highest in obscurity.",
         "hints": {
-            "stage1": "His 1970s exploitation slasher / muscle-car homage starring Kurt Russell, released theatrically in 2007.",
-            "stage2": "Starts with 'D...', two words (5 letters and 5 letters).",
-            "stage3": "Death Proof (100 pts). Avoid: Reservoir Dogs!"
+            "stage1": "His 1970s exploitation slasher and muscle-car homage starring Kurt Russell, officially released theatrically as a feature film in 2007.",
+            "stage2": "Two words (5 letters and 5 letters) starting with 'D...' (D-e-a-t-h P-r-o-o-f), released theatrically as part of Grindhouse.",
+            "stage3": "Death Proof (100 pts). Note: Unreleased student shorts and guest co-directing scenes do not meet the theatrical feature release rule. Avoid: Reservoir Dogs, Pulp Fiction!"
         },
         "plankton": [
             "Pulp Fiction",
@@ -161,9 +161,9 @@ export const DAILY_GAME_DATA = {
         "verifiedDate": "October 10, 2026",
         "modelRationale": "All 9 valid border countries are scored via linguistic search frequency. Luxembourg and Denmark are least cited in border trivia contexts, while France and Switzerland are top-of-mind.",
         "hints": {
-            "stage1": "Think about the smallest landlocked duchy or the northern peninsula border.",
-            "stage2": "Starts with 'L...' or 'D...', small sovereign neighbor.",
-            "stage3": "Luxembourg (100 pts) / Denmark (100 pts)"
+            "stage1": "Look at Germany's northern maritime jutland boundary or western low-countries border, strictly among the 9 sovereign land neighbors.",
+            "stage2": "Differentiated border clues: Either Germany's single-border northern Scandinavian neighbor (7 letters, D...) or the historic multilingual Grand Duchy to the west (10 letters, L...).",
+            "stage3": "Luxembourg, Denmark (100 pts). Note: Liechtenstein does NOT border Germany. Avoid: Austria, Netherlands!"
         },
         "plankton": [
             "France",
@@ -252,9 +252,9 @@ export const DAILY_GAME_DATA = {
         "verifiedDate": "October 10, 2026",
         "modelRationale": "Modern Pentathlon and Canoe Slalom feature the lowest global broadcast viewership and participant bases among official Summer Olympic disciplines.",
         "hints": {
-            "stage1": "A traditional multi-sport combining five diverse disciplines, or whitewater rapid navigation.",
-            "stage2": "Starts with 'M...' (multi-discipline) or 'C...' (whitewater rapid navigation).",
-            "stage3": "Modern Pentathlon, Canoe Slalom (100 pts). Avoid: Archery!"
+            "stage1": "An official medal sport or discipline on the IOC Summer Olympic Programme with low broadcast viewership compared to Athletics or Swimming.",
+            "stage2": "Specific discipline clues: A multi-sport combining fencing, swimming, equestrian, laser-run (16 letters, M... P...); or navigating whitewater slalom gates in a kayak/canoe (11 letters, C... S...).",
+            "stage3": "Modern Pentathlon, Canoe Slalom (100 pts). Note: Specific single-event races (such as track sprints or individual shooting rounds) are sub-events, not standalone Olympic sports or disciplines. Avoid: Archery, Fencing!"
         },
         "plankton": [
             "Swimming",
