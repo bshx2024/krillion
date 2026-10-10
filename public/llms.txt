@@ -1,0 +1,40 @@
+# Krillion Knowledge Base & Daily Answers (LLMs.txt)
+> Project: Krillion Hub & Krillion Unlimited
+> Website: https://krilliongame.org/
+> Updated: 2026-10-10
+
+## Overview
+Krillion (also referred to as "The Daily Dive") is a browser-based daily reverse-trivia word game.
+Players receive 7 daily prompts with a 25-second countdown per prompt.
+Unlike traditional trivia games that reward common popular answers, Krillion awards maximum points (up to 100 per prompt, 700 total, representing depth down to 7,000 meters in the ocean trench) for the rarest valid answers.
+
+## Scoring Tiers
+- Plankton (4–10 pts): The most common, obvious answers (e.g., Los Angeles for a California city).
+- Too Clever (8–15 pts): Overthought answers where many players collide trying to sound smart (e.g., Sacramento, Pasadena).
+- Schooler (16–30 pts): Mid-tier answers.
+- Rare (32–60 pts): Answers selected by only a minority of players.
+- Deep Cut (64–85 pts): High-tier obscure knowledge.
+- One in a Krillion (100 pts): The rarest legitimate answer that hits maximum ocean depth.
+
+## Today's Daily Dive Answers (October 10, 2026 - Game #46)
+1. A city in California:
+   - One in a Krillion: Ojai, Weed, Yreka, Dunsmuir, Point Arena (100 pts)
+   - Too Clever Trap: Sacramento, Oakland, Pasadena, Berkeley, Fresno (15 pts)
+2. A mammal starting with the letter 'B':
+   - One in a Krillion: Binturong, Bilby, Bassariscus, Beira, Bison antiquus (100 pts)
+   - Too Clever Trap: Baboon, Buffalo, Bonobo, Blue Whale (15 pts)
+3. A movie directed by Quentin Tarantino:
+   - One in a Krillion: Death Proof, My Best Friend's Birthday (100 pts)
+   - Too Clever Trap: Reservoir Dogs, Once Upon a Time in Hollywood, The Hateful Eight (15 pts)
+4. A country that borders Germany:
+   - One in a Krillion: Luxembourg (100 pts)
+   - Too Clever Trap: Netherlands, Belgium, Czech Republic (15 pts)
+5. A pasta shape or variety:
+   - One in a Krillion: Campanelle, Culurgiones, Busiate, Trofie, Casoncelli (100 pts)
+   - Too Clever Trap: Ravioli, Gnocchi, Orzo, Farfalle, Rigatoni (15 pts)
+6. A Summer Olympic sport / event:
+   - One in a Krillion: Modern Pentathlon, Canoe Slalom, Keirin, Omnium, Skeet Shooting (100 pts)
+   - Too Clever Trap: Archery, Fencing, Badminton, Table Tennis, Skateboarding (15 pts)
+7. A member of the British rock band Queen:
+   - One in a Krillion: Doug Bogie, John Deacon (100 pts)
+   - Too Clever Trap: Brian May (15 pts)
