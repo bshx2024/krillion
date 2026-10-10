@@ -472,15 +472,15 @@ ${selectedPrompts.map((p, idx) => `          <div class="hint-card">
             </div>
             <h3 class="hint-prompt-name">${p.prompt}</h3>
             <details class="hint-detail">
-              <summary class="hint-summary">Clue 1: Topic & Concept</summary>
+              <summary class="hint-summary">💡 Krillion Direction Clue</summary>
               <div class="hint-body">${p.hints.stage1}</div>
             </details>
             <details class="hint-detail">
-              <summary class="hint-summary">Clue 2: Letters & Word Count</summary>
+              <summary class="hint-summary">🔤 Letter Count Clue</summary>
               <div class="hint-body">${p.hints.stage2}</div>
             </details>
             <details class="hint-detail reveal-gold">
-              <summary class="hint-summary">Reveal: Top Answer & Collision Trap</summary>
+              <summary class="hint-summary">🎯 Rare Krillion Answer</summary>
               <div class="hint-body text-glow"><strong>${p.oneInAKrillion[0]}</strong> (100 pts). Avoid: ${p.tooClever[0]}!</div>
             </details>
           </div>`).join('\n')}
