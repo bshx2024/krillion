@@ -286,11 +286,9 @@
 
             <!-- Result Feedback Toast / Box -->
             <div class="result-feedback-banner" id="result-feedback-banner" style="display: none;">
-              <div class="feedback-tier-badge" id="feedback-tier-badge">ONE IN A KRILLION</div>
-              <div class="feedback-points" id="feedback-points">+100 Points (+1,000m Depth)</div>
-              <p class="feedback-explanation" id="feedback-explanation">
-                Outstanding! Less than 1% of players chose this answer.
-              </p>
+              <div class="feedback-tier-badge" id="feedback-tier-badge"></div>
+              <div class="feedback-points" id="feedback-points"></div>
+              <p class="feedback-explanation" id="feedback-explanation"></p>
 
               <!-- "Why This Answer?" Educational Context Card -->
               <div class="why-this-answer-box" id="why-this-answer-box">
@@ -304,13 +302,13 @@
             </div>
           </div>
 
-          <!-- Game Summary Modal -->
-          <div class="game-summary-modal" id="game-summary-modal" style="display: none;">
+          <!-- Game Summary Modal (Dynamically Populated on Completion) -->
+          <div class="game-summary-modal" id="game-summary-modal" style="display: none;" aria-hidden="true">
             <div class="summary-card">
               <div class="summary-celebration-icon" id="summary-icon">🏆</div>
-              <h3 class="summary-title" id="summary-title">TRENCH CONQUERED!</h3>
-              <div class="final-depth-stat" id="final-depth-stat">6,920 / 7,000m</div>
-              <p class="summary-sub" id="summary-tier-name">Hadal Zone Master Diver</p>
+              <h3 class="summary-title" id="summary-title">TRENCH DIVE COMPLETE</h3>
+              <div class="final-depth-stat" id="final-depth-stat">0 / 7,000m</div>
+              <p class="summary-sub" id="summary-tier-name"></p>
               
               <div class="summary-streak-banner" id="summary-streak-banner">
                 🔥 Current Daily Streak: <strong id="modal-streak-count">1</strong> Day(s)
@@ -486,7 +484,23 @@
           </p>
         </div>
 
-        <div class="hints-grid">
+        <!-- Hints Spoiler Protection Banner -->
+        <div class="spoiler-shield-card spoiler-hints-shield" id="spoiler-hints-shield">
+          <div class="shield-content">
+            <span class="shield-badge">🛡️ HINTS SPOILER GUARD</span>
+            <h3 class="shield-title">Protect Today's Clue Progression</h3>
+            <p class="shield-desc">
+              Progressive hints for today's 7 daily prompts are hidden by default to keep your daily challenge authentic. Play the game first or reveal clues when stuck!
+            </p>
+          </div>
+          <div class="shield-btn-group">
+            <a href="#game-section" class="btn btn-primary">🤿 Play Dive First</a>
+            <button class="btn btn-secondary" id="toggle-hints-spoiler-btn">💡 Reveal Today's Hints</button>
+          </div>
+        </div>
+
+        <div class="spoiler-hints-content is-hidden" id="spoiler-hints-content">
+          <div class="hints-grid">
           <div class="hint-card">
             <div class="hint-card-head">
               <span class="hint-number">Prompt #1</span>
@@ -620,18 +634,19 @@
               <div class="hint-body text-glow"><strong>John Deacon</strong> (100 pts). Avoid: Brian May!</div>
             </details>
           </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SCREEN 5: "Too Clever" Collision Radar -->
+    <!-- SCREEN 5: Predicted Answer Collision Risk -->
     <section id="too-clever" class="content-section">
       <div class="container">
         <div class="section-header">
           <span class="section-tag">STRATEGY & GAME MECHANICS</span>
-          <h2 class="section-title">Krillion "Too Clever" Collision Radar</h2>
+          <h2 class="section-title">Predicted Answer Collision Risk</h2>
           <p class="section-subtitle">
-            Why do seemingly obscure answers only grant 15 points in the Krillion game? Understanding the psychology behind statistical answer clustering.
+            This model estimates whether an answer may be a common alternative based on linguistic familiarity and reference coverage. It does not measure actual player answer distributions.
           </p>
         </div>
 
@@ -639,15 +654,15 @@
           <div class="card glass-card">
             <h3 class="card-title text-warning">⚠️ Anatomy of the Collision Trap</h3>
             <p>
-              In the Krillion game, when thousands of players intentionally overthink a prompt to avoid the obvious choice (e.g., choosing Sacramento instead of Los Angeles for California), they frequently congregate on the <strong>exact same secondary candidate</strong>. This cluster is classified in the <strong>Krillion Too Clever tier (~15 points)</strong>.
+              In reverse-trivia strategy, when candidates intentionally overthink a prompt to avoid the obvious choice (e.g., picking Sacramento instead of Los Angeles for California), linguistic familiarity algorithms predict high candidate concentration on the <strong>exact same secondary candidate</strong>. This cluster is scored in the <strong>Predicted Too Clever tier (~15 points)</strong>.
             </p>
             <div class="comparison-grid">
               <div class="comparison-col bad">
                 <span class="col-title">❌ The "Too Clever" Trap (15 Pts)</span>
                 <ul>
                   <li><strong>Prompt:</strong> California City (Krillion Prompt #1)</li>
-                  <li><strong>Player Thought:</strong> "Everyone will say LA or SF! I'll be smart and say <em>Sacramento</em> or <em>Pasadena</em>!"</li>
-                  <li><strong>Result:</strong> Thousands of players had that same secondary thought. <strong>STATISTICAL COLLISION!</strong></li>
+                  <li><strong>Secondary Guess:</strong> "Everyone will say LA or SF! I'll try <em>Sacramento</em> or <em>Pasadena</em>!"</li>
+                  <li><strong>Model Evaluation:</strong> High secondary familiarity score in linguistic corpora. <strong>PREDICTED CANDIDATE COLLISION!</strong></li>
                 </ul>
               </div>
               <div class="comparison-col good">
@@ -655,7 +670,7 @@
                 <ul>
                   <li><strong>Prompt:</strong> California City (Krillion Prompt #1)</li>
                   <li><strong>Winning Strategy:</strong> Pick small, officially incorporated agricultural, historic, or mountain municipalities: <em>Ojai</em>, <em>Weed</em>, <em>Yreka</em>.</li>
-                  <li><strong>Result:</strong> Extremely low collision probability. <strong>100 METERS DIVE!</strong></li>
+                  <li><strong>Model Evaluation:</strong> Low conversational retrieval frequency. <strong>100 METERS DIVE!</strong></li>
                 </ul>
               </div>
             </div>

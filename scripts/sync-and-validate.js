@@ -127,9 +127,35 @@ ${prompts.map((p, idx) => `              <tr>
             </tbody>`;
 indexContent = indexContent.replace(tbodyRegex, newTbody);
 
-// Synchronize Hints Grid
-const hintsGridRegex = /<div class="hints-grid">[\s\S]*?<\/div>\s*<\/div>\s*<\/section>/;
-const newHintsGrid = `<div class="hints-grid">
+// Synchronize Hints Section
+const hintsSectionRegex = /<section id="hints-section" class="content-section bg-darker">[\s\S]*?<\/section>/;
+const newHintsSection = `<section id="hints-section" class="content-section bg-darker">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">PROGRESSIVE DISCLOSURE</span>
+          <h2 class="section-title">Krillion Hints: Progressive Clues for Today's Krillion Game</h2>
+          <p class="section-subtitle">
+            Need a nudge without ruining the Krillion challenge? Reveal clues progressively to discover your own rare Krillion answer.
+          </p>
+        </div>
+
+        <!-- Hints Spoiler Protection Banner -->
+        <div class="spoiler-shield-card spoiler-hints-shield" id="spoiler-hints-shield">
+          <div class="shield-content">
+            <span class="shield-badge">🛡️ HINTS SPOILER GUARD</span>
+            <h3 class="shield-title">Protect Today's Clue Progression</h3>
+            <p class="shield-desc">
+              Progressive hints for today's 7 daily prompts are hidden by default to keep your daily challenge authentic. Play the game first or reveal clues when stuck!
+            </p>
+          </div>
+          <div class="shield-btn-group">
+            <a href="#game-section" class="btn btn-primary">🤿 Play Dive First</a>
+            <button class="btn btn-secondary" id="toggle-hints-spoiler-btn">💡 Reveal Today's Hints</button>
+          </div>
+        </div>
+
+        <div class="spoiler-hints-content is-hidden" id="spoiler-hints-content">
+          <div class="hints-grid">
 ${prompts.map((p, idx) => `          <div class="hint-card">
             <div class="hint-card-head">
               <span class="hint-number">Prompt #${idx + 1}</span>
@@ -149,10 +175,11 @@ ${prompts.map((p, idx) => `          <div class="hint-card">
               <div class="hint-body text-glow"><strong>${p.oneInAKrillion.join(', ')}</strong> (100 pts). Avoid: ${p.tooClever[0]}!</div>
             </details>
           </div>`).join('\n')}
+          </div>
         </div>
       </div>
     </section>`;
-indexContent = indexContent.replace(hintsGridRegex, newHintsGrid);
+indexContent = indexContent.replace(hintsSectionRegex, newHintsSection);
 
 fs.writeFileSync(indexPath, indexContent, 'utf8');
 console.log('✅ Synchronized index.html');

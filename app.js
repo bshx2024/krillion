@@ -361,9 +361,12 @@ class KrillionGameController {
       });
     }
 
-    // Spoiler Protection Toggle
+    // Spoiler Protection Toggles (Answers & Hints)
     const spoilerBtn = document.getElementById('toggle-spoiler-btn');
     const spoilerContent = document.getElementById('spoiler-revealed-content');
+    const hintsSpoilerBtn = document.getElementById('toggle-hints-spoiler-btn');
+    const hintsContent = document.getElementById('spoiler-hints-content');
+
     if (spoilerBtn && spoilerContent) {
       spoilerBtn.addEventListener('click', () => {
         const isHidden = spoilerContent.classList.contains('is-hidden');
@@ -373,6 +376,19 @@ class KrillionGameController {
         } else {
           spoilerContent.classList.add('is-hidden');
           spoilerBtn.textContent = '👁️ Reveal Today\'s Answers (Spoilers)';
+        }
+      });
+    }
+
+    if (hintsSpoilerBtn && hintsContent) {
+      hintsSpoilerBtn.addEventListener('click', () => {
+        const isHidden = hintsContent.classList.contains('is-hidden');
+        if (isHidden) {
+          hintsContent.classList.remove('is-hidden');
+          hintsSpoilerBtn.textContent = '🔒 Hide Progressive Hints';
+        } else {
+          hintsContent.classList.add('is-hidden');
+          hintsSpoilerBtn.textContent = '💡 Reveal Today\'s Hints';
         }
       });
     }
@@ -444,6 +460,9 @@ class KrillionGameController {
   startSession(type = 'daily') {
     this.sessionType = type;
     clearInterval(this.timerInterval);
+    if (this.summaryModal) {
+      this.summaryModal.style.display = 'none';
+    }
     this.currentIndex = 0;
     this.totalDepth = 0;
     this.sessionHistory = [];
@@ -600,14 +619,14 @@ class KrillionGameController {
       depthGained = 250;
       badgeClass = 'schooler';
       emoji = '🟨';
-      explanation = `Solid valid answer, but recognized by a moderate portion of players.`;
+      explanation = `Solid valid answer, categorized in the moderate frequency tier by our heuristic model.`;
     } else if (isMatch(q.tooClever)) {
       tier = 'TOO CLEVER TRAP';
       points = 15;
       depthGained = 150;
       badgeClass = 'too-clever';
       emoji = '🟧';
-      explanation = `⚠️ STATISTICAL COLLISION: You tried to pick a non-obvious pick, but thousands of players had that same secondary thought!`;
+      explanation = `⚠️ PREDICTED COLLISION RISK: Model indicates high secondary familiarity score (~15 pts). Avoid this common trap!`;
       sfx.playWarningBuzzer();
     } else if (isMatch(q.plankton)) {
       tier = 'PLANKTON';
@@ -615,7 +634,7 @@ class KrillionGameController {
       depthGained = 80;
       badgeClass = 'plankton';
       emoji = '⬜';
-      explanation = `Surface choice! This was the first top-of-mind candidate for almost everyone.`;
+      explanation = `Surface choice! High top-of-mind candidate in open linguistic frequency models.`;
     } else {
       // General valid answer / heuristic fallback
       tier = 'VALID ANSWER (HEURISTIC)';
@@ -751,6 +770,13 @@ Test your obscurity: https://www.krillion.click`;
       if (shieldTitle) {
         shieldTitle.textContent = '🎉 Dive Completed! Answers Unlocked';
       }
+    }
+
+    const spoilerHints = document.getElementById('spoiler-hints-content');
+    const hintsBtn = document.getElementById('toggle-hints-spoiler-btn');
+    if (spoilerHints && hintsBtn) {
+      spoilerHints.classList.remove('is-hidden');
+      hintsBtn.textContent = '🔒 Hide Progressive Hints';
     }
 
     this.summaryModal.style.display = 'flex';

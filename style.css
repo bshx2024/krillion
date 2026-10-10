@@ -1540,8 +1540,9 @@ a:hover {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.spoiler-revealed-content.is-hidden {
-  display: none;
+.spoiler-revealed-content.is-hidden,
+.spoiler-hints-content.is-hidden {
+  display: none !important;
 }
 
 /* --- Table Utility & Feedback Bar --- */
