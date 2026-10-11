@@ -239,7 +239,7 @@
   <script>
     async function fetchRealData() {
       try {
-        const res = await fetch('/api/__stats');
+        const res = await fetch('/api/stats');
         const data = await res.json();
         renderDashboard(data);
       } catch (err) {
@@ -321,13 +321,13 @@
     async function testMockData(type) {
       try {
         if (type === 'googlebot') {
-          await fetch('/api/__stats', {
+          await fetch('/api/stats', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ action: 'mock_bot', botId: 'googlebot' })
           });
         } else if (type === 'visitor') {
-          await fetch('/api/__stats', {
+          await fetch('/api/stats', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ action: 'mock_visitor', source: 'ChatGPT', country: '美国' })

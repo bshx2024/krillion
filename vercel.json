@@ -70,5 +70,11 @@
       "destination": "https://www.krillion.click/:path*",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/__stats",
+      "destination": "/api/stats"
+    }
   ]
 }

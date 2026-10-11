@@ -72,7 +72,7 @@ export default async function middleware(request) {
   const pathname = url.pathname;
 
   // 内部接口不进行统计拦截
-  if (pathname.startsWith('/api/') || pathname === '/__stats') {
+  if (pathname.startsWith('/api/') || pathname.startsWith('/__stats')) {
     return;
   }
 

@@ -870,4 +870,18 @@ function initCategoryTabs() {
 document.addEventListener('DOMContentLoaded', () => {
   new KrillionGameController();
   initCategoryTabs();
+
+  // 静默访客流量统计上报（非阻塞）
+  try {
+    fetch('/api/stats', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'track_visit',
+        referrer: document.referrer,
+        path: window.location.pathname
+      })
+    }).catch(() => {});
+  } catch (_) {}
 });
+
