@@ -24,7 +24,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .site-title {
       font-size: 1.25rem;
@@ -42,12 +42,29 @@
       border-radius: 9999px;
       font-weight: 600;
     }
+    .status-badge {
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .status-ok {
+      background: #dcfce7;
+      color: #15803d;
+    }
+    .status-wait {
+      background: #fef3c7;
+      color: #b45309;
+    }
     .actions {
       display: flex;
-      gap: 10px;
+      gap: 8px;
     }
     .btn {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       padding: 6px 14px;
       border-radius: 6px;
       border: 1px solid #cbd5e1;
@@ -56,10 +73,41 @@
       text-decoration: none;
       cursor: pointer;
       transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
     .btn:hover {
       background: #f1f5f9;
       border-color: #94a3b8;
+    }
+    .btn-primary {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+    }
+    .btn-primary:hover {
+      background: #0369a1;
+      border-color: #0369a1;
+    }
+    .banner {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      font-size: 0.88rem;
+      color: #92400e;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .banner code {
+      background: #fef3c7;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.85rem;
     }
     h2 {
       font-size: 1.12rem;
@@ -111,6 +159,11 @@
       font-weight: 600;
       color: #0f172a;
     }
+    .empty-row {
+      text-align: center;
+      color: #94a3b8;
+      padding: 24px !important;
+    }
     .footer-info {
       margin-top: 40px;
       padding-top: 16px;
@@ -119,19 +172,29 @@
       color: #94a3b8;
       display: flex;
       justify-content: space-between;
+      align-items: center;
     }
   </style>
 </head>
 <body>
   <div class="header-bar">
     <div class="site-title">
-      <span>Krillion.click 实时运营看板</span>
-      <span class="site-badge">LIVE</span>
+      <span>Krillion.click 真实监控引擎</span>
+      <span id="conn-badge" class="status-badge status-wait">检测连接中...</span>
     </div>
     <div class="actions">
-      <a class="btn" href="/">返回首页</a>
-      <a class="btn" href="javascript:location.reload()">刷新数据</a>
+      <button class="btn" onclick="testMockData('googlebot')">⚡ 测试模拟爬虫</button>
+      <button class="btn" onclick="testMockData('visitor')">👤 测试真实访客</button>
+      <a class="btn" href="javascript:fetchRealData()">刷新</a>
     </div>
+  </div>
+
+  <div id="setup-banner" class="banner" style="display: none;">
+    <div><strong>💡 如何开启 24 小时真实持久化采集？</strong></div>
+    <div>目前已部署 Vercel Edge 采集拦截器。只需在 Vercel 后台添加免费的 Upstash Redis 环境变量（1分钟免费搞定）：</div>
+    <div>1. 登录 <a href="https://upstash.com" target="_blank" style="color:#b45309; font-weight:600;">upstash.com</a> 创建一个免费 Redis 数据库；</div>
+    <div>2. 在 Vercel 项目 <strong>Settings -> Environment Variables</strong> 中添加：<code>UPSTASH_REDIS_REST_URL</code> 和 <code>UPSTASH_REDIS_REST_TOKEN</code>。</div>
+    <div>添加后，进站的每个真实 Googlebot 与真人访客将 100% 自动实时入库！</div>
   </div>
 
   <h2>爬虫什么时候来的（北京时间，只算 IP 验证为真的）</h2>
@@ -146,52 +209,11 @@
         </tr>
       </thead>
       <tbody id="crawler-tbody">
-        <tr>
-          <td class="name-col">Googlebot</td>
-          <td>10-08 15:17</td>
-          <td>同时</td>
-          <td>10-08: 29， 10-09: 123， 10-10: 40， 10-11: 14（截至现在）</td>
-        </tr>
-        <tr>
-          <td class="name-col">OAI-SearchBot（ChatGPT 搜索索引）</td>
-          <td>10-08 18:24（只读 robots.txt）</td>
-          <td class="highlight-date">10-11 03:12</td>
-          <td>10-11: 21</td>
-        </tr>
-        <tr>
-          <td class="name-col">Bingbot</td>
-          <td>10-08 19:05（只读 IndexNow key 文件）</td>
-          <td>还没有</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <td class="name-col">Applebot</td>
-          <td>10-08 20:40</td>
-          <td>同时</td>
-          <td>每天 2-10</td>
-        </tr>
-        <tr>
-          <td class="name-col">ClaudeBot</td>
-          <td>10-08 21:42</td>
-          <td>同时</td>
-          <td>10-08 一次抓了 41 页，之后只看 robots.txt 和 sitemap</td>
-        </tr>
-        <tr>
-          <td class="name-col">ChatGPT-User（ChatGPT 替用户读网页）</td>
-          <td class="highlight-date">10-09 15:52</td>
-          <td>同时</td>
-          <td>10-09: 1， 10-11: 10</td>
-        </tr>
-        <tr>
-          <td class="name-col">GPTBot</td>
-          <td>10-11 03:17（只读 sitemap）</td>
-          <td>还没有</td>
-          <td>0</td>
-        </tr>
+        <tr><td colspan="4" class="empty-row">正在加载实时数据...</td></tr>
       </tbody>
     </table>
   </div>
-  <div class="note">注意：爬虫记录是 10-08 下午同步这个功能后才开始的，在那之前来过的爬虫没有记录。</div>
+  <div class="note" id="crawler-note">注意：爬虫记录是边缘拦截器生效后自动统计的，伪造 UA 的垃圾扫描已被清洗剔除。</div>
 
   <h2>什么时候带来真实访客（只算真人浏览器）</h2>
   <div class="card">
@@ -200,48 +222,134 @@
         <tr>
           <th>来源</th>
           <th>第一个真实访客</th>
-          <th>每天访客数（10-08 / 09 / 10 / 11）</th>
+          <th>每天访客数 (UV)</th>
         </tr>
       </thead>
       <tbody id="visitor-tbody">
-        <tr>
-          <td class="name-col">Google</td>
-          <td><strong>10-08 12:53</strong>（印度，首页）</td>
-          <td>8 / 9 / 16 / 7</td>
-        </tr>
-        <tr>
-          <td class="name-col">ChatGPT</td>
-          <td><strong>10-11 05:11</strong>（厄瓜多尔，/）</td>
-          <td>0 / 0 / 0 / 13</td>
-        </tr>
-        <tr>
-          <td class="name-col">直接访问</td>
-          <td>10-07 21:21</td>
-          <td>43 / 14 / 13 / 41</td>
-        </tr>
-        <tr>
-          <td class="name-col">Bing、Perplexity</td>
-          <td>还没有</td>
-          <td>—</td>
-        </tr>
+        <tr><td colspan="3" class="empty-row">正在加载实时数据...</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="footer-info">
-    <span>Krillion SEO & GEO Monitoring Engine</span>
-    <span id="update-time">数据最后更新：2026-10-11 10:35</span>
+    <span>Krillion SEO & GEO Monitoring Engine (Vercel Edge)</span>
+    <span id="update-time">正在连接...</span>
   </div>
 
   <script>
-    // 自动显示北京时间当前刷新时间
-    try {
-      const now = new Date();
-      const bjTime = new Date(now.getTime() + (8 * 60 + now.getTimezoneOffset()) * 60000);
-      const pad = (n) => String(n).padStart(2, '0');
-      const timeStr = `${bjTime.getFullYear()}-${pad(bjTime.getMonth()+1)}-${pad(bjTime.getDate())} ${pad(bjTime.getHours())}:${pad(bjTime.getMinutes())}`;
-      document.getElementById('update-time').innerText = `数据最后更新：${timeStr} (北京时间)`;
-    } catch (e) {}
+    async function fetchRealData() {
+      try {
+        const res = await fetch('/api/__stats');
+        const data = await res.json();
+        renderDashboard(data);
+      } catch (err) {
+        console.error('Failed to load stats:', err);
+      }
+    }
+
+    function renderDashboard(data) {
+      const connBadge = document.getElementById('conn-badge');
+      const banner = document.getElementById('setup-banner');
+
+      if (data.isConfigured) {
+        connBadge.className = 'status-badge status-ok';
+        connBadge.innerText = '🟢 已连接云端数据库（实时采集）';
+        banner.style.display = 'none';
+      } else {
+        connBadge.className = 'status-badge status-wait';
+        connBadge.innerText = '🟡 边缘引擎就绪（待绑云存储）';
+        banner.style.display = 'block';
+      }
+
+      // 1. 渲染爬虫列表
+      const crawlerTbody = document.getElementById('crawler-tbody');
+      const bots = data.bots || {};
+      const botKeys = Object.keys(bots);
+
+      if (botKeys.length === 0) {
+        crawlerTbody.innerHTML = '<tr><td colspan="4" class="empty-row">（暂无爬虫记录，边缘拦截器正在 24 小时监听中...）</td></tr>';
+      } else {
+        let html = '';
+        for (const k of botKeys) {
+          const b = bots[k];
+          const firstSeenText = `${b.firstSeen || '-'} ${b.actionNote || ''}`.trim();
+          const firstPage = b.firstPageSeen || '还没有';
+          const dailyPages = Object.entries(b.dailyPages || {}).map(([d, c]) => `${d}: ${c}`).join('， ') || '0';
+          html += `
+            <tr>
+              <td class="name-col">${escapeHtml(b.name || k)}</td>
+              <td>${escapeHtml(firstSeenText)}</td>
+              <td class="${firstPage !== '还没有' ? 'highlight-date' : ''}">${escapeHtml(firstPage)}</td>
+              <td>${escapeHtml(dailyPages)}</td>
+            </tr>
+          `;
+        }
+        crawlerTbody.innerHTML = html;
+      }
+
+      // 2. 渲染访客列表
+      const visitorTbody = document.getElementById('visitor-tbody');
+      const visitors = data.visitors || {};
+      const defaultSources = ['Google', 'ChatGPT', '直接访问', 'Bing、Perplexity'];
+      const allSources = Array.from(new Set([...defaultSources, ...Object.keys(visitors)]));
+
+      let vHtml = '';
+      for (const src of allSources) {
+        const v = visitors[src];
+        let firstStr = '—';
+        let dailyCounts = '0';
+        if (v) {
+          if (v.firstVisitor) {
+            firstStr = `<strong>${escapeHtml(v.firstVisitor.time)}</strong>（${escapeHtml(v.firstVisitor.country)}，${escapeHtml(v.firstVisitor.path)}）`;
+          }
+          dailyCounts = Object.entries(v.dailyCounts || {}).map(([d, c]) => `${d}: ${c}`).join(' / ') || '0';
+        }
+        vHtml += `
+          <tr>
+            <td class="name-col">${escapeHtml(src)}</td>
+            <td>${firstStr}</td>
+            <td>${dailyCounts}</td>
+          </tr>
+        `;
+      }
+      visitorTbody.innerHTML = vHtml;
+
+      // 更新时间
+      document.getElementById('update-time').innerText = `最后刷新：${data.lastUpdated || '刚刚'} (北京时间)`;
+    }
+
+    async function testMockData(type) {
+      try {
+        if (type === 'googlebot') {
+          await fetch('/api/__stats', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'mock_bot', botId: 'googlebot' })
+          });
+        } else if (type === 'visitor') {
+          await fetch('/api/__stats', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'mock_visitor', source: 'ChatGPT', country: '美国' })
+          });
+        }
+        await fetchRealData();
+      } catch (err) {
+        alert('测试失败: ' + err.message);
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // 页面加载自动获取
+    fetchRealData();
   </script>
 </body>
 </html>
