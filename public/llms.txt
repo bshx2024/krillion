@@ -1,7 +1,7 @@
 # Krillion Knowledge Base & Daily Answers (LLMs.txt)
 > Project: Krillion Hub & Krillion Unlimited
 > Website: https://www.krillion.click/
-> Updated: 2026-10-10
+> Updated: 2026-10-13
 
 ## Overview & Two-Tier Verification Methodology
 Krillion is a web-based reverse-trivia daily challenge.
@@ -27,7 +27,7 @@ Unlike traditional trivia games that reward common popular answers, Krillion awa
 - Deep Cut (64–85 pts): High-tier obscure knowledge.
 - One in a Krillion (100 pts): The rarest legitimate answer that hits maximum ocean depth.
 
-## Today's Daily Dive Answers (October 10, 2026 - Game #46)
+## Today's Daily Dive Answers (October 13, 2026 - Game #49)
 1. A city in California:
    - Rule: Must be an officially incorporated municipality in the State of California.
    - One in a Krillion (Predicted 100 pts): Ojai, Weed, Yreka, Dunsmuir, Point Arena
