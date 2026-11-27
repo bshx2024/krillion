@@ -2,8 +2,8 @@
 // All factual entities verified against authoritative geographic, biological, and historical records.
 
 export const DAILY_GAME_DATA = {
-  gameNumber: 91,
-  date: "2026-11-24",
+  gameNumber: 94,
+  date: "2026-11-27",
   prompts: [
     {
         "id": 1,
